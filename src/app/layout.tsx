@@ -1,8 +1,21 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Cutive_Mono, Urbanist } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const cutive_mono = Cutive_Mono({ 
+  subsets: ["latin"],  
+  weight:  '400',
+  variable: '--font-cutive_mono',
+  display: 'swap',
+});
+
+const urbanist = Urbanist({ 
+  subsets: ["latin"],  
+  weight:  '200',
+  variable: '--font-urbanist',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +29,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${cutive_mono.variable} ${urbanist.variable}`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+      </body>
     </html>
   );
 }
