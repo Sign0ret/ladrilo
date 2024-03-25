@@ -6,6 +6,15 @@ import { Button } from "@/components/ui/button"
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+  } from "@/components/ui/select"
 export default function ChatLayout({
     children,
     params, // will be a page or nested layout
@@ -42,10 +51,86 @@ export default function ChatLayout({
     
                 </div>
                 <div className="flex-1 overflow-auto py-2">
-                    <div className="px-4 mb-4">
+                    <div className="px-4 mb-4 flex items-center gap-2">
                         <Input placeholder="Search contacts..." />
                     </div>
-                    
+                    <div className="px-4 mb-4 flex items-center gap-2 lg:max-w-[280px]">
+
+                    <Select>
+                        <SelectTrigger className='max-w-[150px] lg:max-w-[120px]'>
+                            <SelectValue placeholder="filtrar casa" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                            <SelectLabel>North America</SelectLabel>
+                            <SelectItem value="est">Eastern Standard Time (EST)</SelectItem>
+                            <SelectItem value="cst">Central Standard Time (CST)</SelectItem>
+                            <SelectItem value="mst">Mountain Standard Time (MST)</SelectItem>
+                            <SelectItem value="pst">Pacific Standard Time (PST)</SelectItem>
+                            <SelectItem value="akst">Alaska Standard Time (AKST)</SelectItem>
+                            <SelectItem value="hst">Hawaii Standard Time (HST)</SelectItem>
+                            </SelectGroup>
+                            <SelectGroup>
+                            <SelectLabel>Europe & Africa</SelectLabel>
+                            <SelectItem value="gmt">Greenwich Mean Time (GMT)</SelectItem>
+                            <SelectItem value="cet">Central European Time (CET)</SelectItem>
+                            <SelectItem value="eet">Eastern European Time (EET)</SelectItem>
+                            <SelectItem value="west">
+                                Western European Summer Time (WEST)
+                            </SelectItem>
+                            <SelectItem value="cat">Central Africa Time (CAT)</SelectItem>
+                            <SelectItem value="eat">East Africa Time (EAT)</SelectItem>
+                            </SelectGroup>
+                            <SelectGroup>
+                            <SelectLabel>Asia</SelectLabel>
+                            <SelectItem value="msk">Moscow Time (MSK)</SelectItem>
+                            <SelectItem value="ist">India Standard Time (IST)</SelectItem>
+                            <SelectItem value="cst_china">China Standard Time (CST)</SelectItem>
+                            <SelectItem value="jst">Japan Standard Time (JST)</SelectItem>
+                            <SelectItem value="kst">Korea Standard Time (KST)</SelectItem>
+                            <SelectItem value="ist_indonesia">
+                                Indonesia Central Standard Time (WITA)
+                            </SelectItem>
+                            </SelectGroup>
+                            <SelectGroup>
+                            <SelectLabel>Australia & Pacific</SelectLabel>
+                            <SelectItem value="awst">
+                                Australian Western Standard Time (AWST)
+                            </SelectItem>
+                            <SelectItem value="acst">
+                                Australian Central Standard Time (ACST)
+                            </SelectItem>
+                            <SelectItem value="aest">
+                                Australian Eastern Standard Time (AEST)
+                            </SelectItem>
+                            <SelectItem value="nzst">New Zealand Standard Time (NZST)</SelectItem>
+                            <SelectItem value="fjt">Fiji Time (FJT)</SelectItem>
+                            </SelectGroup>
+                            <SelectGroup>
+                            <SelectLabel>South America</SelectLabel>
+                            <SelectItem value="art">Argentina Time (ART)</SelectItem>
+                            <SelectItem value="bot">Bolivia Time (BOT)</SelectItem>
+                            <SelectItem value="brt">Brasilia Time (BRT)</SelectItem>
+                            <SelectItem value="clt">Chile Standard Time (CLT)</SelectItem>
+                            </SelectGroup>
+                        </SelectContent>
+                        </Select>
+                        <Select>
+                            <SelectTrigger className='max-w-[150px] lg:max-w-[120px]'>
+                                <SelectValue placeholder="filtrar rol" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                <SelectLabel>Fruits</SelectLabel>
+                                <SelectItem value="apple">Apple</SelectItem>
+                                <SelectItem value="banana">Banana</SelectItem>
+                                <SelectItem value="blueberry">Blueberry</SelectItem>
+                                <SelectItem value="grapes">Grapes</SelectItem>
+                                <SelectItem value="pineapple">Pineapple</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                            </Select>
+                    </div>
                     <nav className="grid items-start px-4 text-sm font-medium ">
                         {chatData.map((chat, index) => (
                             <Link
@@ -211,6 +296,50 @@ export default function ChatLayout({
       >
         <path d="M18 6 6 18" />
         <path d="m6 6 12 12" />
+      </svg>
+    )
+  }
+
+  function HomeIcon({ className, ...rest }: IconProps) {
+    return (
+      <svg
+        {...rest}
+        className={className}
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+    )
+  }
+  
+  function PersonStandingIcon({ className, ...rest }: IconProps) {
+    return (
+      <svg
+        {...rest}
+        className={className}
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="5" r="1" />
+        <path d="m9 20 3-6 3 6" />
+        <path d="m6 8 6 2 6-2" />
+        <path d="M12 10v4" />
       </svg>
     )
   }

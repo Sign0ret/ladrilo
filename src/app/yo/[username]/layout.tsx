@@ -16,15 +16,15 @@ export default function UsernameLayout({
         <div className="fixed inset-x-0 bottom-0 h-20 lg:top-0 lg:left-0 lg:h-screen lg:w-20 flex lg:flex-col items-center justify-between bg-gray-100 dark:bg-gray-800 p-4 lg:py-0">
           <div className="flex lg:flex-col items-center space-x-4 lg:space-x-0 lg:space-y-4">
             <Link className="group m-5" href={`/yo/${params.username}/agenda`}>
-              <HelpCircleIcon className="h-6 w-6 text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-50" />
+              <TextIcon className="h-6 w-6 text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-50" />
               <span className="sr-only">agenda</span>
             </Link>
             <Link className="group m-5" href={`/yo/${params.username}/obra`}>
-              <HelpCircleIcon className="h-6 w-6 text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-50" />
+              <HomeIcon className="h-6 w-6 text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-50" />
               <span className="sr-only">obra</span>
             </Link>
             <Link className="group m-5" href={`/yo/${params.username}/chat`}>
-              <HelpCircleIcon className="h-6 w-6 text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-50" />
+              <MessageCircleIcon className="h-6 w-6 text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-50" />
               <span className="sr-only">chat</span>
             </Link>
             <Link className="group m-5" href={`/yo/${params.username}/catalogo`}>
@@ -152,3 +152,45 @@ export default function UsernameLayout({
     )
   }
   
+  function HomeIcon({ className, ...rest }: IconProps) {
+    return (
+      <svg
+        {...rest}
+        className={className}
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+    )
+  }
+
+  function TextIcon({ className, ...rest }: IconProps) {
+    return (
+      <svg
+        {...rest}
+        className={className}
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M17 6.1H3" />
+        <path d="M21 12.1H3" />
+        <path d="M15.1 18H3" />
+      </svg>
+    )
+  }

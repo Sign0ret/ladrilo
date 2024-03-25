@@ -1,4 +1,6 @@
+'use client'
 import React from 'react';
+import { useState } from 'react';
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
@@ -16,7 +18,7 @@ import { Tasks_bar } from '@/components/component/tasks_bar';
 export default function YoChatSpecific( { params }: {
   params: { username: string; chat: string }
 } ) {
- 
+  const [openTasks, setOpenTasks] = useState<boolean>(false);
   return (
     <section>
         <div className="hidden lg:flex flex-col min-h-screen h-screen">
@@ -51,42 +53,95 @@ export default function YoChatSpecific( { params }: {
                     </SheetContent>
                 </Sheet>
             </div>
-            <TextIcon className="h-6 w-6" />
+            {openTasks ? (
+                <Button className="hidden lg:flex ml-2 h-8 w-8" size="icon" variant="outline" onClick={() => setOpenTasks(false)}>
+                    <XIcon className="h-4 w-4" />
+                    <span className="sr-only">Hide tasksbar</span>
+                </Button>
+            ) : (
+                <Button className="hidden lg:flex ml-2 h-8 w-8" size="icon" variant="outline" onClick={() => setOpenTasks(true)}>
+                    <TextIcon className="h-4 w-4" />
+                    <span className="sr-only">open tasks</span>
+                </Button>
+            )}
             </header>
-            <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-            <div className="border shadow-sm rounded-lg">
-                <div className="p-4">
-                <div className="flex items-start gap-4">
-                    <Avatar>
-                    <AvatarImage alt="@johndoe" src="/placeholder-avatar.jpg" />
-                    <AvatarFallback>JD</AvatarFallback>
-                    </Avatar>
-                    <div className="flex flex-col">
-                    <span className="font-semibold">John Doe</span>
-                    <span className="text-sm text-gray-500">Hello Jane!</span>
+            {openTasks ? (
+                <>
+                <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
+                    <section className='flex flex-row '>
+                        <div className="w-4/5">
+                            <div className="p-4">
+                            <div className="flex items-start gap-4">
+                                <Avatar>
+                                <AvatarImage alt="@johndoe" src="/placeholder-avatar.jpg" />
+                                <AvatarFallback>JD</AvatarFallback>
+                                </Avatar>
+                                <div className="flex flex-col">
+                                <span className="font-semibold">John Doe</span>
+                                <span className="text-sm text-gray-500">Hello Jane!</span>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4 mt-4">
+                                <Avatar>
+                                <AvatarImage alt="@janedoe" src="/placeholder-avatar.jpg" />
+                                <AvatarFallback>JD</AvatarFallback>
+                                </Avatar>
+                                <div className="flex flex-col">
+                                <span className="font-semibold">Jane Doe</span>
+                                <span className="text-sm text-gray-500">Hi John!</span>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <section className='w-1/5'>
+                            <Tasks_bar />
+                        </section>
+                    </section>
+                        <div className="mt-auto">
+                            <form className="flex items-center gap-4">
+                            <Input className="flex-1" placeholder="Type a message..." />
+                            <Button variant="outline">Send</Button>
+                            </form>
+                        </div>
+                    </main>
+                    
+                </>
+                    
+            ) : (
+                <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
+                    <div className="">
+                        <div className="p-4">
+                        <div className="flex items-start gap-4">
+                            <Avatar>
+                            <AvatarImage alt="@johndoe" src="/placeholder-avatar.jpg" />
+                            <AvatarFallback>JD</AvatarFallback>
+                            </Avatar>
+                            <div className="flex flex-col">
+                            <span className="font-semibold">John Doe</span>
+                            <span className="text-sm text-gray-500">Hello Jane!</span>
+                            </div>
+                        </div>
+                        <div className="flex items-start gap-4 mt-4">
+                            <Avatar>
+                            <AvatarImage alt="@janedoe" src="/placeholder-avatar.jpg" />
+                            <AvatarFallback>JD</AvatarFallback>
+                            </Avatar>
+                            <div className="flex flex-col">
+                            <span className="font-semibold">Jane Doe</span>
+                            <span className="text-sm text-gray-500">Hi John!</span>
+                            </div>
+                        </div>
+                        </div>
                     </div>
-                </div>
-                <div className="flex items-start gap-4 mt-4">
-                    <Avatar>
-                    <AvatarImage alt="@janedoe" src="/placeholder-avatar.jpg" />
-                    <AvatarFallback>JD</AvatarFallback>
-                    </Avatar>
-                    <div className="flex flex-col">
-                    <span className="font-semibold">Jane Doe</span>
-                    <span className="text-sm text-gray-500">Hi John!</span>
+                    <div className="mt-auto">
+                        <form className="flex items-center gap-4">
+                        <Input className="flex-1" placeholder="Type a message..." />
+                        <Button variant="outline">Send</Button>
+                        </form>
                     </div>
-                </div>
-                </div>
-            </div>
-            <div className="mt-auto">
-                <form className="flex items-center gap-4">
-                <Input className="flex-1" placeholder="Type a message..." />
-                <Button variant="outline">Send</Button>
-                </form>
-            </div>
+                    </main>
+            )}
             
-
-            </main>
         </div>
         {/* mobile */}
         <div className="flex lg:hidden flex-col fixed inset-0 overflow-y-auto min-h-screen h-screen bg-background">
@@ -120,10 +175,26 @@ export default function YoChatSpecific( { params }: {
                     </SheetContent>
                 </Sheet>
             </div>
-            <TextIcon className="h-6 w-6" />
+            <Sheet>
+                <SheetTrigger>
+                    {/* <Button className="hidden lg:flex ml-2 h-8 w-8" size="icon" variant="outline"> */}
+                        <TextIcon className="h-4 w-4" />
+                        <span className="sr-only">open tasks</span>
+                    {/* </Button> */}
+                </SheetTrigger>
+                <SheetContent>
+                    <Tasks_bar />
+                    {/* <SheetHeader>
+                    <SheetDescription>
+                        <p>ajustes</p>
+                    </SheetDescription>
+                    </SheetHeader> */}
+                </SheetContent>
+            </Sheet>
+            
             </header>
             <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-                <div className="border shadow-sm rounded-lg">
+                <div className="">
                     <div className="p-4">
                         <div className="flex items-start gap-4">
                             <Avatar>
@@ -156,10 +227,8 @@ export default function YoChatSpecific( { params }: {
             </main>
         </div>
     </section>
-    
   );
 }
-
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
     className?: string;
@@ -246,6 +315,27 @@ function PencilIcon({ className, ...rest }: IconProps) {
         <path d="M17 6.1H3" />
         <path d="M21 12.1H3" />
         <path d="M15.1 18H3" />
+      </svg>
+    )
+  }
+
+  function XIcon({ className, ...rest }: IconProps) {
+    return (
+      <svg
+        {...rest}
+        className={className}
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
       </svg>
     )
   }

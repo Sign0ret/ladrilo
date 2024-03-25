@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card"
 export function Tasks_bar() {
   return (
-    <Card>
+    <Card className="min-w-full min-h-full">
         {/* <CardHeader>
             <CardTitle>Card Title</CardTitle>
             <CardDescription>Card Description</CardDescription>
@@ -22,7 +22,7 @@ export function Tasks_bar() {
         <CardContent>
         <div key="1" className="flex flex-col h-full w-64 border-l dark:border-gray-800">
           <div className="flex items-center justify-between px-4 py-2 border-b dark:border-gray-800">
-            <h2 className="text-lg font-semibold">Project Chat</h2>
+            <h2 className="text-lg font-semibold">Tareas</h2>
             <TextIcon className="h-6 w-6" />
           </div>
           <ScrollArea className="flex-1 py-2">
@@ -39,6 +39,91 @@ export function Tasks_bar() {
                 <span className="flex h-2 w-2 rounded-full bg-red-500" />
                 <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
               </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-green-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-yellow-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-red-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-green-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              {/* <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-yellow-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-red-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-green-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-yellow-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-red-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-green-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-yellow-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-red-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-green-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-yellow-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-red-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-green-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-yellow-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-red-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-green-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-yellow-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-red-500" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">This is a description of the task.</p>
+              </div>
+               */}
             </div>
           </ScrollArea>
           <div className="px-4 py-2 border-t dark:border-gray-800">
