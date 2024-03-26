@@ -19,8 +19,119 @@ export default function YoChatSpecific( { params }: {
   params: { username: string; chat: string }
 } ) {
   const [openTasks, setOpenTasks] = useState<boolean>(false);
+  const [upInput, setUpInput] = useState<boolean>(false);
+  const messages = [
+    {
+      name: "John Doe",
+      username: "@johndoe",
+      message: "Hello Jane!",
+      avatarSrc: "/placeholder-avatar.jpg"
+    },
+    {
+      name: "Jane Doe",
+      username: "@janedoe",
+      message: "Hi John!",
+      avatarSrc: "/placeholder-avatar.jpg"
+    },
+    {
+      name: "Bastian",
+      username: "@johndoe",
+      message: "Hello Jane!",
+      avatarSrc: "/placeholder-avatar.jpg"
+    },
+    {
+        name: "John Doe",
+        username: "@johndoe",
+        message: "Hello Jane!",
+        avatarSrc: "/placeholder-avatar.jpg"
+      },
+      {
+        name: "Jane Doe",
+        username: "@janedoe",
+        message: "Hi John!",
+        avatarSrc: "/placeholder-avatar.jpg"
+      },
+      {
+        name: "Bastian",
+        username: "@johndoe",
+        message: "Hello Jane!",
+        avatarSrc: "/placeholder-avatar.jpg"
+      },
+      {
+        name: "John Doe",
+        username: "@johndoe",
+        message: "Hello Jane!",
+        avatarSrc: "/placeholder-avatar.jpg"
+      },
+      {
+        name: "Jane Doe",
+        username: "@janedoe",
+        message: "Hi John!",
+        avatarSrc: "/placeholder-avatar.jpg"
+      },
+      {
+        name: "Bastian",
+        username: "@johndoe",
+        message: "Hello Jane!",
+        avatarSrc: "/placeholder-avatar.jpg"
+      },
+      {
+          name: "John Doe",
+          username: "@johndoe",
+          message: "Hello Jane!",
+          avatarSrc: "/placeholder-avatar.jpg"
+        },
+        {
+          name: "Jane Doe",
+          username: "@janedoe",
+          message: "Hi John!",
+          avatarSrc: "/placeholder-avatar.jpg"
+        },
+        {
+          name: "Bastian",
+          username: "@johndoe",
+          message: "Hello Jane!",
+          avatarSrc: "/placeholder-avatar.jpg"
+        },
+        {
+            name: "John Doe",
+            username: "@johndoe",
+            message: "Hello Jane!",
+            avatarSrc: "/placeholder-avatar.jpg"
+          },
+          {
+            name: "Jane Doe",
+            username: "@janedoe",
+            message: "Hi John!",
+            avatarSrc: "/placeholder-avatar.jpg"
+          },
+          {
+            name: "Bastian",
+            username: "@johndoe",
+            message: "Hello Janeworjthaliuoth9mihyhyñohr,p9ur,h'9uhyiuhgioureghrit,hy09serh9 rst9uhy,krs9uth, 9ustjhyiuoesh9uiehviuoeh ouh ohe4ou6h9 bqh,e 9uheiuyher9uvk,9h,j9uhj v9bue5h 9uhewru96chfiu h!",
+            avatarSrc: "/placeholder-avatar.jpg"
+          },
+          {
+              name: "John Doe",
+              username: "@johndoe",
+              message: "Hello Jane!",
+              avatarSrc: "/placeholder-avatar.jpg"
+            },
+            {
+              name: "Jane Doe",
+              username: "@janedoe",
+              message: "Hi John!",
+              avatarSrc: "/placeholder-avatar.jpg"
+            },
+            {
+              name: "Bastian",
+              username: "@johndoe",
+              message: "Hello Jane!",
+              avatarSrc: "/placeholder-avatar.jpg"
+            },
+  ];
   return (
-    <section>
+    <section className='z-50'>
         <div className="hidden lg:flex flex-col min-h-screen h-screen">
             <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
             <Link className="lg:hidden" href="#">
@@ -42,7 +153,6 @@ export default function YoChatSpecific( { params }: {
                             <span className="text-sm text-gray-500 mr-auto">Online</span>
                         </div>
                         </div>
-                        {/* <PencilIcon className="h-4 w-4" /> */}
                     </SheetTrigger>
                     <SheetContent>
                         <SheetHeader>
@@ -53,6 +163,10 @@ export default function YoChatSpecific( { params }: {
                     </SheetContent>
                 </Sheet>
             </div>
+            <Button className="hidden lg:flex ml-2 h-8 w-8" size="icon" variant="outline" onClick={() => setUpInput(!upInput)}>
+                <PencilIcon className="h-4 w-4"/>
+                <span className="sr-only">Move up</span>
+            </Button>
             {openTasks ? (
                 <Button className="hidden lg:flex ml-2 h-8 w-8" size="icon" variant="outline" onClick={() => setOpenTasks(false)}>
                     <XIcon className="h-4 w-4" />
@@ -67,33 +181,23 @@ export default function YoChatSpecific( { params }: {
             </header>
             {openTasks ? (
                 <>
-                <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-                    <section className='flex flex-row '>
-                        <div className="w-4/5">
-                            <div className="p-4">
-                            <div className="flex items-start gap-4">
-                                <Avatar>
-                                <AvatarImage alt="@johndoe" src="/placeholder-avatar.jpg" />
-                                <AvatarFallback>JD</AvatarFallback>
-                                </Avatar>
-                                <div className="flex flex-col">
-                                <span className="font-semibold">John Doe</span>
-                                <span className="text-sm text-gray-500">Hello Jane!</span>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4 mt-4">
-                                <Avatar>
-                                <AvatarImage alt="@janedoe" src="/placeholder-avatar.jpg" />
-                                <AvatarFallback>JD</AvatarFallback>
-                                </Avatar>
-                                <div className="flex flex-col">
-                                <span className="font-semibold">Jane Doe</span>
-                                <span className="text-sm text-gray-500">Hi John!</span>
-                                </div>
-                            </div>
-                            </div>
+                <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 max-h-full overflow-y-hidden">
+                    <section className='flex flex-row overflow-y-hidden'>
+                        <div className="w-4/5 p-4 overflow-y-auto no-scrollbar">
+                                {messages.map((message, index) => (
+                                    <div key={index} className="flex items-start gap-4 mt-4">
+                                    <Avatar>
+                                        <AvatarImage alt={message.username} src={message.avatarSrc} />
+                                        <AvatarFallback>{message.username}</AvatarFallback>
+                                    </Avatar>
+                                    <div className="flex flex-col">
+                                        <span className="font-semibold">{message.name}</span>
+                                        <span className="text-sm text-gray-500">{message.message}</span>
+                                    </div>
+                                    </div>
+                                ))}
                         </div>
-                        <section className='w-1/5'>
+                        <section className='w-1/5 rounded-xl border'>
                             <Tasks_bar />
                         </section>
                     </section>
@@ -108,32 +212,22 @@ export default function YoChatSpecific( { params }: {
                 </>
                     
             ) : (
-                <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-                    <div className="">
-                        <div className="p-4">
-                        <div className="flex items-start gap-4">
+                <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 max-h-full overflow-y-hidden">
+                     <div className='p-4 overflow-y-auto no-scrollbar'>
+                        {messages.map((message, index) => (
+                            <div key={index} className="flex items-start gap-4 mt-4">
                             <Avatar>
-                            <AvatarImage alt="@johndoe" src="/placeholder-avatar.jpg" />
-                            <AvatarFallback>JD</AvatarFallback>
+                                <AvatarImage alt={message.username} src={message.avatarSrc} />
+                                <AvatarFallback>{message.username}</AvatarFallback>
                             </Avatar>
                             <div className="flex flex-col">
-                            <span className="font-semibold">John Doe</span>
-                            <span className="text-sm text-gray-500">Hello Jane!</span>
+                                <span className="font-semibold">{message.name}</span>
+                                <span className="text-sm text-gray-500">{message.message}</span>
                             </div>
-                        </div>
-                        <div className="flex items-start gap-4 mt-4">
-                            <Avatar>
-                            <AvatarImage alt="@janedoe" src="/placeholder-avatar.jpg" />
-                            <AvatarFallback>JD</AvatarFallback>
-                            </Avatar>
-                            <div className="flex flex-col">
-                            <span className="font-semibold">Jane Doe</span>
-                            <span className="text-sm text-gray-500">Hi John!</span>
                             </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="mt-auto">
+                        ))}
+                      </div>
+                    <div className={`mt-auto ${upInput ? 'mb-20' : 'mb-0'}`}>
                         <form className="flex items-center gap-4">
                         <Input className="flex-1" placeholder="Type a message..." />
                         <Button variant="outline">Send</Button>
@@ -144,13 +238,14 @@ export default function YoChatSpecific( { params }: {
             
         </div>
         {/* mobile */}
-        <div className="flex lg:hidden flex-col fixed inset-0 overflow-y-auto min-h-screen h-screen bg-background">
+        <div className="flex lg:hidden flex-col fixed inset-0 overflow-y-auto min-h-screen h-screen bg-background z-40">
             <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
                 <Link className="lg:hidden" href={`/yo/${params.username}/chat`}>
                     <MessageCircleIcon className="h-6 w-6" />
                     <span className="sr-only">Home</span>
                 </Link>
                 <div className="w-full flex-1">
+                    
                 <Sheet>
                     <SheetTrigger>
                     <div className="flex items-center gap-4">
@@ -164,7 +259,6 @@ export default function YoChatSpecific( { params }: {
                             <span className="text-sm text-gray-500 mr-auto">Online</span>
                         </div>
                         </div>
-                        {/* <PencilIcon className="h-4 w-4" /> */}
                     </SheetTrigger>
                     <SheetContent>
                         <SheetHeader>
@@ -175,6 +269,10 @@ export default function YoChatSpecific( { params }: {
                     </SheetContent>
                 </Sheet>
             </div>
+            <Button className="flex lg:hidden ml-2 h-8 w-8" size="icon" variant="outline" onClick={() => setUpInput(!upInput)}>
+                <PencilIcon className="h-4 w-4"/>
+                <span className="sr-only">Move up</span>
+            </Button>
             <Sheet>
                 <SheetTrigger>
                     {/* <Button className="hidden lg:flex ml-2 h-8 w-8" size="icon" variant="outline"> */}
@@ -193,38 +291,28 @@ export default function YoChatSpecific( { params }: {
             </Sheet>
             
             </header>
-            <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-                <div className="">
-                    <div className="p-4">
-                        <div className="flex items-start gap-4">
+            <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 max-h-full overflow-y-hidden">
+                     <div className='p-4 overflow-y-auto no-scrollbar'>
+                        {messages.map((message, index) => (
+                            <div key={index} className="flex items-start gap-4 mt-4">
                             <Avatar>
-                                <AvatarImage alt="@johndoe" src="/placeholder-avatar.jpg" />
-                                <AvatarFallback>JD</AvatarFallback>
+                                <AvatarImage alt={message.username} src={message.avatarSrc} />
+                                <AvatarFallback>{message.username}</AvatarFallback>
                             </Avatar>
                             <div className="flex flex-col">
-                                <span className="font-semibold">John Doe</span>
-                                <span className="text-sm text-gray-500">Hello Jane!</span>
+                                <span className="font-semibold">{message.name}</span>
+                                <span className="text-sm text-gray-500">{message.message}</span>
                             </div>
-                        </div>
-                        <div className="flex items-start gap-4 mt-4">
-                            <Avatar>
-                                <AvatarImage alt="@janedoe" src="/placeholder-avatar.jpg" />
-                                <AvatarFallback>JD</AvatarFallback>
-                            </Avatar>
-                            <div className="flex flex-col">
-                                <span className="font-semibold">Jane Doe</span>
-                                <span className="text-sm text-gray-500">Hi John!</span>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="mt-auto">
-                    <form className="flex items-center gap-4">
+                        ))}
+                      </div>
+                    <div className={`mt-auto ${upInput ? 'mb-20' : 'mb-0'}`}>
+                        <form className="flex items-center gap-4">
                         <Input className="flex-1" placeholder="Type a message..." />
                         <Button variant="outline">Send</Button>
-                    </form>
-                </div>
-            </main>
+                        </form>
+                    </div>
+                    </main>
         </div>
     </section>
   );

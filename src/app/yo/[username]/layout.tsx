@@ -13,7 +13,7 @@ export default function UsernameLayout({
   }) {
     return (
       <section className="min-h-screen h-100 flex-row">
-        <div className="fixed inset-x-0 bottom-0 h-20 lg:top-0 lg:left-0 lg:h-screen lg:w-20 flex lg:flex-col items-center justify-between bg-gray-100 dark:bg-gray-800 p-4 lg:py-0">
+        <div className="fixed inset-x-0 bottom-0 h-20 lg:top-0 lg:left-0 lg:h-screen lg:w-20 flex lg:flex-col items-center justify-between bg-gray-100 dark:bg-gray-800 p-4 lg:py-0 z-10">
           <div className="flex lg:flex-col items-center space-x-4 lg:space-x-0 lg:space-y-4">
             <Link className="group m-5" href={`/yo/${params.username}/agenda`}>
               <TextIcon className="h-6 w-6 text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-50" />
@@ -32,7 +32,7 @@ export default function UsernameLayout({
               <span className="sr-only">catalogo</span>
             </Link>
           </div>
-          <div className="flex lg:flex-col items-center space-x-2 lg:space-x-0 lg:space-y-2 mb-5">
+          <div className="flex lg:flex-col items-center space-x-2 lg:space-x-0 lg:space-y-2 lg:mb-5">
           <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                 <Button

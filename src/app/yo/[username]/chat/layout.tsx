@@ -27,8 +27,42 @@ export default function ChatLayout({
     const chatData = [
         { username: 'JohnDoe', name: 'John Doe', message: 'Hey, hows it going?...', badge: 3 },
         { username: 'JaneDoe', name: 'Jane Doe', message: 'Can you send me the file?...', badge: 5 },
+        { username: 'mikejones', name: 'Mike Jones', message: 'Lets meet tomorrow at...', badge: 2 },
+        { username: 'JohnDoe', name: 'John Doe', message: 'Hey, hows it going?...', badge: 3 },
+        { username: 'JaneDoe', name: 'Jane Doe', message: 'Can you send me the file?...', badge: 5 },
+        { username: 'mikejones', name: 'Mike Jones', message: 'Lets meet tomorrow at...', badge: 2 },
+        { username: 'JohnDoe', name: 'John Doe', message: 'Hey, hows it going?...', badge: 3 },
+        { username: 'JaneDoe', name: 'Jane Doe', message: 'Can you send me the file?...', badge: 5 },
         { username: 'mikejones', name: 'Mike Jones', message: 'Lets meet tomorrow at...', badge: 2 }
       ];
+      const houses = {
+        "Process": [
+          { value: "house1", label: "House 1" },
+          { value: "house2", label: "House 2" },
+          { value: "house3", label: "House 3" },
+          { value: "house4", label: "House 4" }
+        ],
+        "Done": [
+          { value: "house5", label: "House 5" },
+          { value: "house6", label: "House 6" },
+          { value: "house7", label: "House 7" },
+          { value: "house8", label: "House 8" }
+        ],
+        "Pending": [
+          { value: "house9", label: "House 9" },
+          { value: "house10", label: "House 10" },
+          { value: "house11", label: "House 11" }
+        ]
+      };
+      const roles = {
+        "Roles": [
+          { value: "admin", label: "Admin" },
+          { value: "moderator", label: "Moderator" },
+          { value: "user", label: "User" },
+          { value: "guest", label: "Guest" },
+          { value: "developer", label: "Developer" }
+        ]
+      };
     return (
       <section>
         {open ? (
@@ -56,81 +90,38 @@ export default function ChatLayout({
                     </div>
                     <div className="px-4 mb-4 flex items-center gap-2 lg:max-w-[280px]">
 
-                    <Select>
-                        <SelectTrigger className='max-w-[150px] lg:max-w-[120px]'>
-                            <SelectValue placeholder="filtrar casa" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                            <SelectLabel>North America</SelectLabel>
-                            <SelectItem value="est">Eastern Standard Time (EST)</SelectItem>
-                            <SelectItem value="cst">Central Standard Time (CST)</SelectItem>
-                            <SelectItem value="mst">Mountain Standard Time (MST)</SelectItem>
-                            <SelectItem value="pst">Pacific Standard Time (PST)</SelectItem>
-                            <SelectItem value="akst">Alaska Standard Time (AKST)</SelectItem>
-                            <SelectItem value="hst">Hawaii Standard Time (HST)</SelectItem>
-                            </SelectGroup>
-                            <SelectGroup>
-                            <SelectLabel>Europe & Africa</SelectLabel>
-                            <SelectItem value="gmt">Greenwich Mean Time (GMT)</SelectItem>
-                            <SelectItem value="cet">Central European Time (CET)</SelectItem>
-                            <SelectItem value="eet">Eastern European Time (EET)</SelectItem>
-                            <SelectItem value="west">
-                                Western European Summer Time (WEST)
-                            </SelectItem>
-                            <SelectItem value="cat">Central Africa Time (CAT)</SelectItem>
-                            <SelectItem value="eat">East Africa Time (EAT)</SelectItem>
-                            </SelectGroup>
-                            <SelectGroup>
-                            <SelectLabel>Asia</SelectLabel>
-                            <SelectItem value="msk">Moscow Time (MSK)</SelectItem>
-                            <SelectItem value="ist">India Standard Time (IST)</SelectItem>
-                            <SelectItem value="cst_china">China Standard Time (CST)</SelectItem>
-                            <SelectItem value="jst">Japan Standard Time (JST)</SelectItem>
-                            <SelectItem value="kst">Korea Standard Time (KST)</SelectItem>
-                            <SelectItem value="ist_indonesia">
-                                Indonesia Central Standard Time (WITA)
-                            </SelectItem>
-                            </SelectGroup>
-                            <SelectGroup>
-                            <SelectLabel>Australia & Pacific</SelectLabel>
-                            <SelectItem value="awst">
-                                Australian Western Standard Time (AWST)
-                            </SelectItem>
-                            <SelectItem value="acst">
-                                Australian Central Standard Time (ACST)
-                            </SelectItem>
-                            <SelectItem value="aest">
-                                Australian Eastern Standard Time (AEST)
-                            </SelectItem>
-                            <SelectItem value="nzst">New Zealand Standard Time (NZST)</SelectItem>
-                            <SelectItem value="fjt">Fiji Time (FJT)</SelectItem>
-                            </SelectGroup>
-                            <SelectGroup>
-                            <SelectLabel>South America</SelectLabel>
-                            <SelectItem value="art">Argentina Time (ART)</SelectItem>
-                            <SelectItem value="bot">Bolivia Time (BOT)</SelectItem>
-                            <SelectItem value="brt">Brasilia Time (BRT)</SelectItem>
-                            <SelectItem value="clt">Chile Standard Time (CLT)</SelectItem>
-                            </SelectGroup>
-                        </SelectContent>
+                        <Select>
+                            <SelectTrigger className='max-w-[150px] lg:max-w-[120px]'>
+                                <SelectValue placeholder="filtrar casa" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {Object.entries(houses).map(([status, options]) => (
+                                    <SelectGroup key={status}>
+                                    <SelectLabel>{status}</SelectLabel>
+                                    {options.map(option => (
+                                        <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                                    ))}
+                                    </SelectGroup>
+                                ))}
+                            </SelectContent>
                         </Select>
                         <Select>
                             <SelectTrigger className='max-w-[150px] lg:max-w-[120px]'>
                                 <SelectValue placeholder="filtrar rol" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectGroup>
-                                <SelectLabel>Fruits</SelectLabel>
-                                <SelectItem value="apple">Apple</SelectItem>
-                                <SelectItem value="banana">Banana</SelectItem>
-                                <SelectItem value="blueberry">Blueberry</SelectItem>
-                                <SelectItem value="grapes">Grapes</SelectItem>
-                                <SelectItem value="pineapple">Pineapple</SelectItem>
-                                </SelectGroup>
+                                {Object.entries(roles).map(([group, options]) => (
+                                    <SelectGroup key={group}>
+                                    <SelectLabel>{group}</SelectLabel>
+                                    {options.map(option => (
+                                        <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                                    ))}
+                                    </SelectGroup>
+                                ))}
                             </SelectContent>
-                            </Select>
+                        </Select>
                     </div>
+                    {/* lg */}
                     <nav className="grid items-start px-4 text-sm font-medium ">
                         {chatData.map((chat, index) => (
                             <Link
@@ -196,8 +187,8 @@ export default function ChatLayout({
                         <div className="px-4 mb-4">
                             <Input placeholder="Search contacts..." />
                         </div>
-                        
-                        <nav className="grid items-start px-4 text-sm font-medium ">
+                        {/* mobile */}
+                        <nav className="grid items-start px-4 text-sm font-medium">
                             {chatData.map((chat, index) => (
                                 <Link
                                 key={index}
@@ -205,7 +196,7 @@ export default function ChatLayout({
                                 href={`/yo/${params.username}/chat/${chat.username}`}
                                 onClick={() => setSelectedChat(index)}
                                 >
-                                <Avatar className="z-0"> {/* Change z-[-20] to z-0 */}
+                                <Avatar>
                                     <AvatarImage alt={`@${chat.username}`} src="/placeholder-avatar.jpg" />
                                     <AvatarFallback>{chat.name.charAt(0)}</AvatarFallback>
                                 </Avatar>
