@@ -15,86 +15,66 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-export function Tasks_bar() {
-  const [clickedTask, setClickedTask] = useState<number | null>(null);
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { Tareas_sidebar } from './chat/tareas_sidebar';
+import { Documentos_sidebar } from './chat/documentos_sidebar';
+import { Fotos_sidebar } from './chat/fotos_sidebar';
 
+export function Tasks_bar() {
+  // Options
+  const [value, setValue] = React.useState('tareas');
+  // Tasks
+  const [clickedTask, setClickedTask] = useState<number | null>(null);
   const handleClick = (index: number) => {
     setClickedTask(index === clickedTask ? null : index);
   };
-  const tasks = [
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-  ];
+  // Fotos
+
+  // Documentos
+
+  // otros
+
+  // Switch
+  let content;
+  switch (value) {
+    case 'tareas':
+      content = <Tareas_sidebar />;
+      break;
+    case 'fotos':
+      content = <Fotos_sidebar />;
+      break;
+    case 'documentos':
+      content = <Documentos_sidebar />;
+      break;
+    default:
+      content = <Tareas_sidebar />;
+      break;
+  }
   return (
-    <Card className="border-none min-w-full max-h-full overflow-y-auto no-scrollbar">
+    <Card className="border-none shadow-none min-w-full max-h-full min-h-full overflow-y-auto no-scrollbar">
         <CardHeader className='sticky top-0 z-10 bg-inherit'>
             <CardTitle>
-              <div className="flex items-center justify-between px-4 py-2">
+              {/* <div className="flex items-center justify-between px-4 py-2">
                 <h2 className="text-lg font-semibold">Tareas</h2>
                 <TextIcon className="h-6 w-6" />
-              </div>
+              </div> */}
+              <ToggleGroup
+                type="single" 
+                value={value}
+                onValueChange={(value) => {
+                  if (value) setValue(value);
+                }}
+              >
+                <ToggleGroupItem value="tareas"><TextIcon className="h-4 w-4" /></ToggleGroupItem>
+                <ToggleGroupItem value="fotos">F</ToggleGroupItem>
+                <ToggleGroupItem value="documentos">D</ToggleGroupItem>
+              </ToggleGroup>
+
             </CardTitle>
             {/* <CardDescription></CardDescription> */}
         </CardHeader>
-        <CardContent>
-        <div key="1" className="flex flex-col h-full w-64">
-          <ScrollArea className="flex-1 py-2">
-          <div className="px-4 space-y-4">
-            {tasks.map((task, index) => (
-              <div
-                key={index}
-                className={`flex items-start gap-2 p-2 ${
-                  clickedTask === index ? 'bg-gray-300' : 'hover:bg-gray-200'
-                }`}
-                onClick={() => handleClick(index)}
-              >
-                <span className={`flex h-2 w-2 rounded-full bg-${task.color}`} />
-                <input
-                  type="text" 
-                  className="text-sm text-gray-500 dark:text-gray-400 outline-none border-none"
-                  value={task.description}
-                  readOnly
-                />
-              </div>
-            ))}
-          </div>
-          </ScrollArea>
-          
-        </div>
-        </CardContent>
-        <CardFooter className='sticky bottom-0 z-10 bg-inherit'>
-            <Button className="w-full" size="sm">
-              Add Task
-            </Button>
-        </CardFooter>
+        {content}
     </Card>
-    
   )
 }
 
@@ -122,3 +102,4 @@ function TextIcon({ className, ...rest }: IconProps) {
     </svg>
   )
 }
+

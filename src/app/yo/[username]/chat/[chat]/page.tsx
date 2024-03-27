@@ -22,113 +22,173 @@ export default function YoChatSpecific( { params }: {
   const [upInput, setUpInput] = useState<boolean>(false);
   const messages = [
     {
-      name: "John Doe",
-      username: "@johndoe",
-      message: "Hello Jane!",
-      avatarSrc: "/placeholder-avatar.jpg"
+      username: "adolfo",
+      text: "Sure, I'd be happy to help.Sure, I'd be happy to help. Could you please provide your order number? Sure, I'd be happy to help. Could you please provide your order number?",
+      avatarSrc: "/placeholder-user.jpg",
+      avatarFallback: "JD",
+      hour: "10",
+      minute: "15"
     },
     {
-      name: "Jane Doe",
-      username: "@janedoe",
-      message: "Hi John!",
-      avatarSrc: "/placeholder-avatar.jpg"
+      username: "User",
+      text: "I need help with my order.",
+      avatarSrc: "/placeholder-user.jpg",
+      avatarFallback: "U",
+      hour: "10",
+      minute: "20"
     },
     {
-      name: "Bastian",
-      username: "@johndoe",
-      message: "Hello Jane!",
-      avatarSrc: "/placeholder-avatar.jpg"
+      username: "John Doe",
+      text: "Sure, I'd be happy to help.Sure, I'd be happy to help. Could you please provide your order number? Sure, I'd be happy to help. Could you please provide your order number?",
+      avatarSrc: "/placeholder-user.jpg",
+      avatarFallback: "JD",
+      hour: "10",
+      minute: "25"
     },
     {
-        name: "John Doe",
-        username: "@johndoe",
-        message: "Hello Jane!",
-        avatarSrc: "/placeholder-avatar.jpg"
+        username: "adolfo",
+        text: "Hi there! How can I assist you today?",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "JD",
+        hour: "10",
+        minute: "15"
       },
       {
-        name: "Jane Doe",
-        username: "@janedoe",
-        message: "Hi John!",
-        avatarSrc: "/placeholder-avatar.jpg"
+        username: "User",
+        text: "I need help with my order.",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "U",
+        hour: "10",
+        minute: "20"
       },
       {
-        name: "Bastian",
-        username: "@johndoe",
-        message: "Hello Jane!",
-        avatarSrc: "/placeholder-avatar.jpg"
+        username: "John Doe",
+        text: "Sure, I'd be happy to help. Could you please provide your order number?",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "JD",
+        hour: "10",
+        minute: "25"
       },
       {
-        name: "John Doe",
-        username: "@johndoe",
-        message: "Hello Jane!",
-        avatarSrc: "/placeholder-avatar.jpg"
+        username: "adolfo",
+        text: "Hi there! How can I assist you today?",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "JD",
+        hour: "10",
+        minute: "15"
       },
       {
-        name: "Jane Doe",
-        username: "@janedoe",
-        message: "Hi John!",
-        avatarSrc: "/placeholder-avatar.jpg"
+        username: "User",
+        text: "I need help with my order.",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "U",
+        hour: "10",
+        minute: "20"
       },
       {
-        name: "Bastian",
-        username: "@johndoe",
-        message: "Hello Jane!",
-        avatarSrc: "/placeholder-avatar.jpg"
+        username: "John Doe",
+        text: "Sure, I'd be happy to help. Could you please provide your order number?",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "JD",
+        hour: "10",
+        minute: "25"
       },
       {
-          name: "John Doe",
-          username: "@johndoe",
-          message: "Hello Jane!",
-          avatarSrc: "/placeholder-avatar.jpg"
-        },
-        {
-          name: "Jane Doe",
-          username: "@janedoe",
-          message: "Hi John!",
-          avatarSrc: "/placeholder-avatar.jpg"
-        },
-        {
-          name: "Bastian",
-          username: "@johndoe",
-          message: "Hello Jane!",
-          avatarSrc: "/placeholder-avatar.jpg"
-        },
-        {
-            name: "John Doe",
-            username: "@johndoe",
-            message: "Hello Jane!",
-            avatarSrc: "/placeholder-avatar.jpg"
-          },
-          {
-            name: "Jane Doe",
-            username: "@janedoe",
-            message: "Hi John!",
-            avatarSrc: "/placeholder-avatar.jpg"
-          },
-          {
-            name: "Bastian",
-            username: "@johndoe",
-            message: "Hello Janeworjthaliuoth9mihyhyñohr,p9ur,h'9uhyiuhgioureghrit,hy09serh9 rst9uhy,krs9uth, 9ustjhyiuoesh9uiehviuoeh ouh ohe4ou6h9 bqh,e 9uheiuyher9uvk,9h,j9uhj v9bue5h 9uhewru96chfiu h!",
-            avatarSrc: "/placeholder-avatar.jpg"
-          },
-          {
-              name: "John Doe",
-              username: "@johndoe",
-              message: "Hello Jane!",
-              avatarSrc: "/placeholder-avatar.jpg"
-            },
-            {
-              name: "Jane Doe",
-              username: "@janedoe",
-              message: "Hi John!",
-              avatarSrc: "/placeholder-avatar.jpg"
-            },
-            {
-              name: "Bastian",
-              username: "@johndoe",
-              message: "Hello Jane!",
-              avatarSrc: "/placeholder-avatar.jpg"
-            },
+        username: "adolfo",
+        text: "Hi there! How can I assist you today?",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "JD",
+        hour: "10",
+        minute: "15"
+      },
+      {
+        username: "User",
+        text: "I need help with my order.",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "U",
+        hour: "10",
+        minute: "20"
+      },
+      {
+        username: "John Doe",
+        text: "Sure, I'd be happy to help. Could you please provide your order number?",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "JD",
+        hour: "10",
+        minute: "25"
+      },
+      {
+        username: "adolfo",
+        text: "Hi there! How can I assist you today?",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "JD",
+        hour: "10",
+        minute: "15"
+      },
+      {
+        username: "User",
+        text: "I need help with my order.",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "U",
+        hour: "10",
+        minute: "20"
+      },
+      {
+        username: "John Doe",
+        text: "Sure, I'd be happy to help. Could you please provide your order number?",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "JD",
+        hour: "10",
+        minute: "25"
+      },
+      {
+        username: "adolfo",
+        text: "Hi there! How can I assist you today?",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "JD",
+        hour: "10",
+        minute: "15"
+      },
+      {
+        username: "User",
+        text: "I need help with my order.",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "U",
+        hour: "10",
+        minute: "20"
+      },
+      {
+        username: "John Doe",
+        text: "Sure, I'd be happy to help. Could you please provide your order number?",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "JD",
+        hour: "10",
+        minute: "25"
+      },
+      {
+        username: "adolfo",
+        text: "Hi there! How can I assist you today?",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "JD",
+        hour: "10",
+        minute: "15"
+      },
+      {
+        username: "User",
+        text: "I need help with my order.",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "U",
+        hour: "10",
+        minute: "20"
+      },
+      {
+        username: "John Doe",
+        text: "Sure, I'd be happy to help. Could you please provide your order number?",
+        avatarSrc: "/placeholder-user.jpg",
+        avatarFallback: "JD",
+        hour: "10",
+        minute: "25"
+      },
   ];
   return (
     <section className='z-50'>
@@ -181,32 +241,45 @@ export default function YoChatSpecific( { params }: {
             </header>
             {openTasks ? (
                 <>
-                <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 max-h-full overflow-y-hidden">
+                <main className="flex flex-1 flex-col gap-4 p-4 pr-0 md:gap-8 md:p-6  md:pr-0 max-h-full overflow-y-hidden">
                     <section className='flex flex-row overflow-y-hidden'>
                         <div className="w-4/5 p-4 overflow-y-auto no-scrollbar">
-                                {messages.map((message, index) => (
-                                    <div key={index} className="flex items-start gap-4 mt-4">
-                                    <Avatar>
-                                        <AvatarImage alt={message.username} src={message.avatarSrc} />
-                                        <AvatarFallback>{message.username}</AvatarFallback>
+                            {messages.map((message, index) => (
+                                <div key={index} className={`flex items-end ${message.username === params.username ? 'justify-end' : ''} space-x-2 space-y-2`}>
+                                {message.username !== params.username && (
+                                    <Avatar className="w-8 h-8">
+                                    <AvatarImage alt={message.username} src={message.avatarSrc} />
+                                    <AvatarFallback>{message.avatarFallback}</AvatarFallback>
                                     </Avatar>
-                                    <div className="flex flex-col">
-                                        <span className="font-semibold">{message.name}</span>
-                                        <span className="text-sm text-gray-500">{message.message}</span>
+                                )}
+                                <div className={`max-w-[460px] px-4 py-2 rounded-${message.username === params.username ? 'l' : 'r'}-lg rounded-t-lg ${message.username === params.username ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700'}`}>
+                                    <div>
+                                    <span className="text-gray-500 mr-1">{message.hour}:{message.minute}</span>
+                                    {message.text}
                                     </div>
-                                    </div>
-                                ))}
+                                    {message.username !== params.username && (
+                                    <div className={`absolute bottom-0 left-0 ml-3 w-0 h-0 ${message.username === params.username ? 'border-x-8 border-x-transparent border-t-8 border-t-blue-500' : 'border-x-8 border-x-transparent border-t-8 border-t-gray-200 dark:border-t-gray-700'}`} />
+                                    )}
+                                </div>
+                                {message.username === params.username && (
+                                    <Avatar className="w-8 h-8">
+                                    <AvatarImage alt={message.username} src={message.avatarSrc} />
+                                    <AvatarFallback>{message.avatarFallback}</AvatarFallback>
+                                    </Avatar>
+                                )}
+                                </div>
+                            ))}
                         </div>
-                        <section className='w-1/5 rounded-xl border'>
+                        <section className='w-[280px] border'>
                             <Tasks_bar />
                         </section>
                     </section>
-                        <div className="mt-auto">
-                            <form className="flex items-center gap-4">
-                            <Input className="flex-1" placeholder="Type a message..." />
-                            <Button variant="outline">Send</Button>
-                            </form>
-                        </div>
+                      <div className={`mt-auto pr-6 ${upInput ? 'mb-20' : 'mb-0'}`}>
+                          <form className="flex items-center gap-4">
+                          <Input className="flex-1" placeholder="Type a message..." />
+                          <Button variant="outline">Send</Button>
+                          </form>
+                      </div>
                     </main>
                     
                 </>
@@ -215,17 +288,59 @@ export default function YoChatSpecific( { params }: {
                 <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 max-h-full overflow-y-hidden">
                      <div className='p-4 overflow-y-auto no-scrollbar'>
                         {messages.map((message, index) => (
-                            <div key={index} className="flex items-start gap-4 mt-4">
-                            <Avatar>
+                            <div key={index} className={`flex items-end ${message.username === params.username ? 'justify-end' : ''} space-x-2 space-y-2 `}>
+                            {message.username !== params.username && (
+                                <Avatar className="w-8 h-8">
                                 <AvatarImage alt={message.username} src={message.avatarSrc} />
-                                <AvatarFallback>{message.username}</AvatarFallback>
-                            </Avatar>
-                            <div className="flex flex-col">
-                                <span className="font-semibold">{message.name}</span>
-                                <span className="text-sm text-gray-500">{message.message}</span>
+                                <AvatarFallback>{message.avatarFallback}</AvatarFallback>
+                                </Avatar>
+                            )}
+                            <div className={`px-4 max-w-[600px]  py-2 rounded-${message.username === params.username ? 'l' : 'r'}-lg rounded-t-lg ${message.username === params.username ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700'}`}>
+                                <div>
+                                <span className="text-gray-500 mr-1">{message.hour}:{message.minute}</span>
+                                {message.text}
+                                </div>
+                                {message.username !== params.username && (
+                                <div className={`absolute bottom-0 left-0 ml-3 w-0 h-0 ${message.username === params.username ? 'border-x-8 border-x-transparent border-t-8 border-t-blue-500' : 'border-x-8 border-x-transparent border-t-8 border-t-gray-200 dark:border-t-gray-700'}`} />
+                                )}
                             </div>
+                            {message.username === params.username && (
+                                <Avatar className="w-8 h-8">
+                                <AvatarImage alt={message.username} src={message.avatarSrc} />
+                                <AvatarFallback>{message.avatarFallback}</AvatarFallback>
+                                </Avatar>
+                            )}
                             </div>
                         ))}
+                        {/* <div className="py-20 relative flex flex-grow flex-col px-12 justify-end">
+                            <div
+                                className="ml-auto rounded-lg rounded-tr-none my-1 p-2 text-sm bg-green-300 flex flex-col relative speech-bubble-right">
+                                <p>Do you still have that car from gone in 60 seconds? Can I borrow it please.</p>
+                                <p className="text-gray-600 text-xs text-right leading-none">8:00 AM</p>
+                            </div>
+                            <div className="mr-auto rounded-lg rounded-tl-none my-1 p-2 text-sm bg-white flex flex-col relative speech-bubble-left">
+                                <p>Yeah dude for sure</p>
+                                <p className="text-gray-600 text-xs text-right leading-none">8:45 AM</p>
+                            </div>
+                            <div
+                                className="ml-auto rounded-lg rounded-tr-none my-1 p-2 text-sm bg-green-300 flex flex-col relative speech-bubble-right">
+                                <p>Dude WTF was up with that plane you were on!!!?</p>
+                                <p className="text-gray-600 text-xs text-right leading-none">8:00 AM</p>
+                            </div>
+                            <div className="mr-auto rounded-lg rounded-tl-none my-1 p-2 text-sm bg-white flex flex-col relative speech-bubble-left">
+                                <p>LOL I Know right </p>
+                                <p className="text-gray-600 text-xs text-right leading-none">8:45 AM</p>
+                            </div>
+                            <div
+                                className="ml-auto rounded-lg rounded-tr-none my-1 p-2 text-sm bg-green-300 flex flex-col relative speech-bubble-right">
+                                <p >Hey man what should we do this weekend?</p>
+                                <p className="text-gray-600 text-xs text-right leading-none">8:00 AM</p>
+                            </div>
+                            <div className="mr-auto rounded-lg rounded-tl-none my-1 p-2 text-sm bg-white flex flex-col relative speech-bubble-left">
+                                <p>Steal the declaration of independence?...</p>
+                                <p className="text-gray-600 text-xs text-right leading-none">8:45 AM</p>
+                            </div>
+                        </div> */}
                       </div>
                     <div className={`mt-auto ${upInput ? 'mb-20' : 'mb-0'}`}>
                         <form className="flex items-center gap-4">
@@ -294,17 +409,30 @@ export default function YoChatSpecific( { params }: {
             <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 max-h-full overflow-y-hidden">
                      <div className='p-4 overflow-y-auto no-scrollbar'>
                         {messages.map((message, index) => (
-                            <div key={index} className="flex items-start gap-4 mt-4">
-                            <Avatar>
-                                <AvatarImage alt={message.username} src={message.avatarSrc} />
-                                <AvatarFallback>{message.username}</AvatarFallback>
-                            </Avatar>
-                            <div className="flex flex-col">
-                                <span className="font-semibold">{message.name}</span>
-                                <span className="text-sm text-gray-500">{message.message}</span>
-                            </div>
-                            </div>
-                        ))}
+                                <div key={index} className={`flex items-end ${message.username === params.username ? 'justify-end' : ''} space-x-2 space-y-2`}>
+                                {message.username !== params.username && (
+                                    <Avatar className="w-8 h-8">
+                                    <AvatarImage alt={message.username} src={message.avatarSrc} />
+                                    <AvatarFallback>{message.avatarFallback}</AvatarFallback>
+                                    </Avatar>
+                                )}
+                                <div className={`max-w-[280px] px-4 py-2 rounded-${message.username === params.username ? 'l' : 'r'}-lg rounded-t-lg ${message.username === params.username ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700'}`}>
+                                    <div>
+                                    <span className="text-gray-500 mr-1">{message.hour}:{message.minute}</span>
+                                    {message.text}
+                                    </div>
+                                    {message.username !== params.username && (
+                                    <div className={`absolute bottom-0 left-0 ml-3 w-0 h-0 ${message.username === params.username ? 'border-x-8 border-x-transparent border-t-8 border-t-blue-500' : 'border-x-8 border-x-transparent border-t-8 border-t-gray-200 dark:border-t-gray-700'}`} />
+                                    )}
+                                </div>
+                                {message.username === params.username && (
+                                    <Avatar className="w-8 h-8">
+                                    <AvatarImage alt={message.username} src={message.avatarSrc} />
+                                    <AvatarFallback>{message.avatarFallback}</AvatarFallback>
+                                    </Avatar>
+                                )}
+                                </div>
+                            ))}
                       </div>
                     <div className={`mt-auto ${upInput ? 'mb-20' : 'mb-0'}`}>
                         <form className="flex items-center gap-4">

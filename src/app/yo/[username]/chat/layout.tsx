@@ -25,7 +25,7 @@ export default function ChatLayout({
     const [selectedChat, setSelectedChat] = useState<number | null>(null);
     const [open, setOpen] = useState<boolean>(true);
     const chatData = [
-        { username: 'JohnDoe', name: 'John Doe', message: 'Hey, hows it going?...', badge: 3 },
+        { username: 'JohnDoe', name: 'John Doe Robert California Asies', message: 'Hey, hows it going?...', badge: 3 },
         { username: 'JaneDoe', name: 'Jane Doe', message: 'Can you send me the file?...', badge: 5 },
         { username: 'mikejones', name: 'Mike Jones', message: 'Lets meet tomorrow at...', badge: 2 },
         { username: 'JohnDoe', name: 'John Doe', message: 'Hey, hows it going?...', badge: 3 },
