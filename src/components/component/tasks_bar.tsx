@@ -21,7 +21,14 @@ import { Documentos_sidebar } from './chat/documentos_sidebar';
 import { Fotos_sidebar } from './chat/fotos_sidebar';
 import { TextIcon } from '../icons';
 
-export function Tasks_bar() {
+type Props = {
+  params: {
+    username: string;
+    chat: string;
+  };
+};
+
+export function Tasks_bar({ params }: Props) {
   // Options
   const [value, setValue] = React.useState('tareas');
   // Fotos
@@ -34,25 +41,25 @@ export function Tasks_bar() {
   let content;
   switch (value) {
     case 'tareas':
-      content = <Tareas_sidebar />;
+      content = <Tareas_sidebar params={params} />;
       break;
     case 'fotos':
-      content = <Fotos_sidebar />;
+      content = <Fotos_sidebar params={params} />;
       break;
     case 'documentos':
-      content = <Documentos_sidebar />;
+      content = <Documentos_sidebar params={params} />;
       break;
       case 'productos':
-      content = <Tareas_sidebar />;
+      content = <Tareas_sidebar params={params} />;
       break;
     case 'pagos':
-      content = <Fotos_sidebar />;
+      content = <Fotos_sidebar params={params} />;
       break;
     case 'acciones':
-      content = <Documentos_sidebar />;
+      content = <Documentos_sidebar params={params} />;
       break;
     default:
-      content = <Tareas_sidebar />;
+      content = <Tareas_sidebar params={params} />;
       break;
   }
   return (

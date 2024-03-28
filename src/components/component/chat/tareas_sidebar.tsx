@@ -22,29 +22,48 @@ import {
     DialogTitle,
     DialogTrigger,
   } from "@/components/ui/dialog"
+  import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+  } from "@/components/ui/drawer"
+  
   import { Progress } from "@/components/ui/progress"
 import { Label } from "@/components/ui/label"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
-export function Tareas_sidebar() {
+
+type Props = {
+  params: {
+    username: string;
+    chat: string;
+  };
+};
+
+export function Tareas_sidebar({ params }: Props) {
   const tasks = [
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
+    { asignado: 'mikejones', mensaje: 60, descripcion: 'This is a description of the task.', fechaLimite: '', progreso: 0 },
+    { asignado: 'mikejones', mensaje: 70, descripcion: 'This is a description of the task.', fechaLimite: '', progreso: 25 },
+    { asignado: 'mikejones', mensaje: 80, descripcion: 'This is a description of the task.', fechaLimite: '', progreso: 50 },
   ];
   const personas = [
-    { value: 'Person 1', label: 'Person 1' },
+    { value: 'mikejones', label: 'mikejones' },
     { value: 'Person 2', label: 'Person 2' },
     { value: 'Person 3', label: 'Person 3' }
   ];
   const status = [
-    { value: 'Assigned', label: 'Assigned' },
-    { value: 'Doing', label: 'Doing' },
-    { value: 'Done', label: 'Done' },
-    { value: 'Reviewed', label: 'Reviewed' },
-    { value: 'Archived', label: 'Archived' }
+    { value: 0, label: 'Asignada' },
+    { value: 25, label: 'Haciendo' },
+    { value: 50, label: 'Hecha' },
+    { value: 75, label: 'Revisada' },
+    { value: 100, label: 'Archivada' }
   ];
   return (
     <section>
@@ -66,7 +85,7 @@ export function Tareas_sidebar() {
                                 <div className="space-y-1">
                                   <h3 className="font-medium text-lg">Task Title</h3>
                                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                                    {task.description}
+                                    {task.descripcion}
                                   </p>
                                 </div>
                               </div>
@@ -77,14 +96,13 @@ export function Tareas_sidebar() {
                         </DialogTrigger>
                         <DialogContent className='max-h-screen overflow-y-auto'>
                           <DialogHeader>
-                            <DialogTitle>...</DialogTitle>
+                            <DialogTitle>Editar Tarea</DialogTitle>
                             <DialogDescription>
                             <div className="space-y-2">
-                                <h4 className="font-medium leading-none">Edit Task</h4>
                                 <div className="grid gap-2">
                                   <div className="space-y-1">
-                                    <Label htmlFor="person-assigned">Person Assigned</Label>
-                                    <Select defaultValue="Select person">
+                                    <Label htmlFor="person-assigned">Persona Asignada</Label>
+                                    <Select defaultValue={task.asignado}>
                                       <SelectTrigger className="w-full">
                                         <SelectValue placeholder="Select person" />
                                       </SelectTrigger>
@@ -96,34 +114,34 @@ export function Tareas_sidebar() {
                                     </Select>
                                   </div>
                                   <div className="space-y-1">
-                                    <Label htmlFor="task-description">Task Description</Label>
+                                    <Label htmlFor="task-description">Descripción</Label>
                                     <Textarea
                                       className="h-32"
-                                      defaultValue="This is a placeholder task description. It's meant to give you an idea of how this component will look with your actual task description."
+                                      defaultValue={task.descripcion}
                                       id="task-description"
                                     />
                                   </div>
                                   <div className="space-y-1">
                                     <Label className="flex justify-between items-center w-full" htmlFor="task-status">
-                                      Task Status
+                                      Progreso
                                       <Progress className="w-1/2" value={44} />
                                     </Label>
-                                    <Select defaultValue="Select status">
+                                    <Select defaultValue={task.progreso.toString()}>
                                       <SelectTrigger className="w-full">
                                         <SelectValue placeholder="Select status" />
                                       </SelectTrigger>
                                       <SelectContent>
                                         {status.map(item => (
-                                            <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>
+                                            <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
                                         ))}
                                       </SelectContent>
                                     </Select>
                                   </div>
                                   <div className="space-y-1">
-                                    <Label htmlFor="delivery-date">Delivery Date</Label>
+                                    <Label htmlFor="delivery-date">Fecha Límite</Label>
                                     <Input className="w-full" id="delivery-date" type="date" />
                                   </div>
-                                  <Button className="w-full">Save Changes</Button>
+                                  <Button className="w-full">Guardar Cambios</Button>
                                 </div>
                               </div>
                             </DialogDescription>
@@ -137,23 +155,23 @@ export function Tareas_sidebar() {
                 
             </div>
         </CardContent>
-        <CardFooter className='sticky bottom-0 z-10 bg-background'>
+        <CardFooter className='hidden lg:flex sticky bottom-0 z-10 bg-background'>
             <Dialog>
                 <DialogTrigger>
                     <Button className="w-full" size="sm">
-                        Add Task
+                        Nueva Tarea
                     </Button>
                 </DialogTrigger>
                 <DialogContent className='max-h-screen overflow-y-auto'>
                     <DialogHeader>
-                    <DialogTitle>Are you absolutely sure?</DialogTitle>
+                    <DialogTitle>Nueva Tarea</DialogTitle>
                     <DialogDescription>
                         <div className="space-y-2">
-                            <h4 className="font-medium leading-none">Edit Task</h4>
+                            {/* <h4 className="font-medium leading-none">Edit Task</h4> */}
                             <div className="grid gap-2">
                             <div className="space-y-1">
-                            <Label htmlFor="person-assigned">Person Assigned</Label>
-                            <Select defaultValue="Select person">
+                            <Label htmlFor="person-assigned">Persona asignada</Label>
+                            <Select defaultValue={params.chat}>
                                 <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Select person" />
                                 </SelectTrigger>
@@ -165,7 +183,7 @@ export function Tareas_sidebar() {
                             </Select>
                             </div>
                             <div className="space-y-1">
-                            <Label htmlFor="task-description">Task Description</Label>
+                            <Label htmlFor="task-description">Descripción</Label>
                             <Textarea
                                 className="h-32"
                                 defaultValue="This is a placeholder task description. It's meant to give you an idea of how this component will look with your actual task description."
@@ -174,25 +192,25 @@ export function Tareas_sidebar() {
                             </div>
                             <div className="space-y-1">
                             <Label className="flex justify-between items-center w-full" htmlFor="task-status">
-                                Task Status
+                                Progreso
                                 <Progress className="w-1/2" value={44} />
                             </Label>
-                            <Select defaultValue="Select status">
+                            <Select defaultValue='0'>
                                 <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Select status" />
                                 </SelectTrigger>
                                     <SelectContent>
                                         {status.map(item => (
-                                            <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>
+                                            <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
                                         ))}
                                     </SelectContent>
                             </Select>
                             </div>
                             <div className="space-y-1">
-                            <Label htmlFor="delivery-date">Delivery Date</Label>
+                            <Label htmlFor="delivery-date">Fecha límite</Label>
                             <Input className="w-full" id="delivery-date" type="date" />
                             </div>
-                            <Button className="w-full">Crear tarea</Button>
+                            <Button className="w-full">Asignar tarea</Button>
                         </div>
                         </div>
                     </DialogDescription>
@@ -200,116 +218,28 @@ export function Tareas_sidebar() {
                 </DialogContent>
             </Dialog>
         </CardFooter>
+        <CardFooter className='flex lg:hidden sticky bottom-0 z-10 bg-background'>
+          <Drawer>
+            <DrawerTrigger>
+              <Button className="w-full" size="sm">
+                Nueva Tarea
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader>
+                <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                <DrawerDescription>This action cannot be undone.</DrawerDescription>
+              </DrawerHeader>
+              <DrawerFooter>
+                <Button>Submit</Button>
+                <DrawerClose>
+                  <Button variant="outline">Cancel</Button>
+                </DrawerClose>
+              </DrawerFooter>
+            </DrawerContent>
+          </Drawer>
+        </CardFooter>
     </section>
     
   )
 }
-interface IconProps extends React.SVGProps<SVGSVGElement> {
-    className?: string;
-  }
-function MessageCircleIcon({ className, ...rest }: IconProps) {
-    return (
-      <svg
-        {...rest}
-        className={className}
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z" />
-      </svg>
-    )
-  }
-  
-  
-  function BellIcon({ className, ...rest }: IconProps) {
-    return (
-      <svg
-        {...rest}
-        className={className}
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-      </svg>
-    )
-  }
-  
-
-function PencilIcon({ className, ...rest }: IconProps) {
-    return (
-      <svg
-        {...rest}
-        className={className}
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-        <path d="m15 5 4 4" />
-      </svg>
-    )
-  }
-
-  function TextIcon({ className, ...rest }: IconProps) {
-    return (
-      <svg
-        {...rest}
-        className={className}
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M17 6.1H3" />
-        <path d="M21 12.1H3" />
-        <path d="M15.1 18H3" />
-      </svg>
-    )
-  }
-
-  function XIcon({ className, ...rest }: IconProps) {
-    return (
-      <svg
-        {...rest}
-        className={className}
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M18 6 6 18" />
-        <path d="m6 6 12 12" />
-      </svg>
-    )
-  }

@@ -5,7 +5,6 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
 import {
     Sheet,
     SheetContent,
@@ -14,13 +13,56 @@ import {
     SheetTitle,
     SheetTrigger,
   } from "@/components/ui/sheet"
+  import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+  } from "@/components/ui/drawer"
+  
 import { Tasks_bar } from '@/components/component/tasks_bar';
-import { TextIcon, MessageCircleIcon, PencilIcon, XIcon } from '@/components/icons';
-export default function YoChatSpecific( { params }: {
-  params: { username: string; chat: string }
-} ) {
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+  } from "@/components/ui/dialog"
+  import { Progress } from "@/components/ui/progress"
+import { TextIcon, MessageCircleIcon, PencilIcon, XIcon, UploadIcon, FileIcon} from '@/components/icons';
+import { Label } from "@/components/ui/label"
+import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
+
+type Props = {
+    params: {
+      username: string;
+      chat: string;
+    };
+  };
+
+export default function YoChatSpecific({ params }: Props) {
   const [openTasks, setOpenTasks] = useState<boolean>(false);
   const [upInput, setUpInput] = useState<boolean>(false);
+  const personas = [
+    { value: 'mikejones', label: 'mikejones' },
+    { value: 'Person 2', label: 'Person 2' },
+    { value: 'Person 3', label: 'Person 3' }
+  ];
+  const status = [
+    { value: 0, label: 'Asignada' },
+    { value: 25, label: 'Haciendo' },
+    { value: 50, label: 'Hecha' },
+    { value: 75, label: 'Revisada' },
+    { value: 100, label: 'Archivada' }
+  ];
   const messages = [
     {
       username: "adolfo",
@@ -240,9 +282,9 @@ export default function YoChatSpecific( { params }: {
                 </Button>
             )}
             </header>
+            <main className="flex flex-1 flex-col gap-4 p-4 pr-0 mr-0 md:p-6  md:pr-0 max-h-full overflow-y-hidden">
             {openTasks ? (
                 <>
-                <main className="flex flex-1 flex-col gap-4 p-4 pr-0 mr-0 md:p-6  md:pr-0 max-h-full overflow-y-hidden">
                     <section className='flex flex-row overflow-y-hidden'>
                         <div className="w-4/5 p-4 overflow-y-auto no-scrollbar">
                             {messages.map((message, index) => (
@@ -272,21 +314,12 @@ export default function YoChatSpecific( { params }: {
                             ))}
                         </div>
                         <section className='w-[280px] border ml-auto'>
-                            <Tasks_bar />
+                            <Tasks_bar params={params} />
                         </section>
                     </section>
-                      <div className={`mt-auto pr-6 ${upInput ? 'mb-20' : 'mb-0'}`}>
-                          <form className="flex items-center gap-4">
-                          <Input className="flex-1" placeholder="Type a message..." />
-                          <Button variant="outline">Send</Button>
-                          </form>
-                      </div>
-                    </main>
-                    
                 </>
                     
             ) : (
-                <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 max-h-full overflow-y-hidden">
                      <div className='p-4 overflow-y-auto no-scrollbar'>
                         {messages.map((message, index) => (
                             <div key={index} className={`flex items-end ${message.username === params.username ? 'justify-end' : ''} space-x-2 space-y-2 `}>
@@ -313,45 +346,361 @@ export default function YoChatSpecific( { params }: {
                             )}
                             </div>
                         ))}
-                        {/* <div className="py-20 relative flex flex-grow flex-col px-12 justify-end">
-                            <div
-                                className="ml-auto rounded-lg rounded-tr-none my-1 p-2 text-sm bg-green-300 flex flex-col relative speech-bubble-right">
-                                <p>Do you still have that car from gone in 60 seconds? Can I borrow it please.</p>
-                                <p className="text-gray-600 text-xs text-right leading-none">8:00 AM</p>
-                            </div>
-                            <div className="mr-auto rounded-lg rounded-tl-none my-1 p-2 text-sm bg-white flex flex-col relative speech-bubble-left">
-                                <p>Yeah dude for sure</p>
-                                <p className="text-gray-600 text-xs text-right leading-none">8:45 AM</p>
-                            </div>
-                            <div
-                                className="ml-auto rounded-lg rounded-tr-none my-1 p-2 text-sm bg-green-300 flex flex-col relative speech-bubble-right">
-                                <p>Dude WTF was up with that plane you were on!!!?</p>
-                                <p className="text-gray-600 text-xs text-right leading-none">8:00 AM</p>
-                            </div>
-                            <div className="mr-auto rounded-lg rounded-tl-none my-1 p-2 text-sm bg-white flex flex-col relative speech-bubble-left">
-                                <p>LOL I Know right </p>
-                                <p className="text-gray-600 text-xs text-right leading-none">8:45 AM</p>
-                            </div>
-                            <div
-                                className="ml-auto rounded-lg rounded-tr-none my-1 p-2 text-sm bg-green-300 flex flex-col relative speech-bubble-right">
-                                <p >Hey man what should we do this weekend?</p>
-                                <p className="text-gray-600 text-xs text-right leading-none">8:00 AM</p>
-                            </div>
-                            <div className="mr-auto rounded-lg rounded-tl-none my-1 p-2 text-sm bg-white flex flex-col relative speech-bubble-left">
-                                <p>Steal the declaration of independence?...</p>
-                                <p className="text-gray-600 text-xs text-right leading-none">8:45 AM</p>
-                            </div>
-                        </div> */}
                       </div>
-                    <div className={`mt-auto ${upInput ? 'mb-20' : 'mb-0'}`}>
-                        <form className="flex items-center gap-4">
-                        <Input className="flex-1" placeholder="Type a message..." />
-                        <Button variant="outline">Send</Button>
-                        </form>
-                    </div>
-                    </main>
             )}
-            
+            <div className={`mt-auto pr-6 ${upInput ? 'mb-20' : 'mb-0'}`}>
+                        
+                <form className="flex items-center gap-4">
+                    <DropdownMenu>
+                    <DropdownMenuTrigger>
+                        <PencilIcon className="h-4 w-4 ml-4"/>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className='flex flex-col ml-14 mb-2'>
+                        <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        {/* Foto/video nuevo */}
+                        <Dialog>
+                            <DialogTrigger>
+                                <DropdownMenuLabel className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                                    Foto/Video
+                                </DropdownMenuLabel>
+                            </DialogTrigger>
+                            <DialogContent className='max-h-screen overflow-y-auto'>
+                                <DialogHeader>
+                                <DialogTitle>Subir fotos</DialogTitle>
+                                <DialogDescription>
+                                    <div className="space-y-2">
+                                    <div key="1" className="border-dashed border-2 rounded-md p-6 w-full max-w-md mx-auto relative">
+                                        <Button className="absolute top-2 right-2" variant="ghost">
+                                            <XIcon className="h-4 w-4" />
+                                        </Button>
+                                        <div className="flex flex-col items-center space-y-4">
+                                            <UploadIcon className="h-8 w-8 text-gray-400" />
+                                            <p className="text-gray-500 dark:text-gray-400">Drag & drop your files here, or</p>
+                                            <Label className="cursor-pointer" htmlFor="file-upload">
+                                            <Button variant="outline">Browse</Button>
+                                            </Label>
+                                            <Input className="sr-only" id="file-upload" multiple type="file" />
+                                        </div>
+                                        <div className="mt-6 border-t pt-6">
+                                            <h3 className="text-lg font-semibold">Selected Files:</h3>
+                                            <div className="mt-4 space-y-2">
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center gap-2">
+                                                <img
+                                                    alt="file1"
+                                                    className="object-cover rounded-full hover:scale-150 transition-transform duration-200"
+                                                    height={24}
+                                                    src="/placeholder.svg"
+                                                    style={{
+                                                    aspectRatio: "24/24",
+                                                    objectFit: "cover",
+                                                    }}
+                                                    width={24}
+                                                />
+                                                <span className="font-medium">file1.jpg</span>
+                                                <span className="text-sm text-gray-500 ml-2">(1.2 MB)</span>
+                                                </div>
+                                                <Button size="sm" variant="ghost">
+                                                Remove
+                                                </Button>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center gap-2">
+                                                <img
+                                                    alt="file2"
+                                                    className="object-cover rounded-full"
+                                                    height={24}
+                                                    src="/placeholder.svg"
+                                                    style={{
+                                                    aspectRatio: "24/24",
+                                                    objectFit: "cover",
+                                                    }}
+                                                    width={24}
+                                                />
+                                                <span className="font-medium">file2.png</span>
+                                                <span className="text-sm text-gray-500 ml-2">(2.5 MB)</span>
+                                                </div>
+                                                <Button size="sm" variant="ghost">
+                                                Remove
+                                                </Button>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center gap-2">
+                                                <FileIcon className="h-6 w-6 text-gray-400" />
+                                                <span className="font-medium">file3.pdf</span>
+                                                <span className="text-sm text-gray-500 ml-2">(500 KB)</span>
+                                                </div>
+                                                <Button size="sm" variant="ghost">
+                                                Remove
+                                                </Button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div className="mt-6">
+                                            <Button>Submit Files</Button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </DialogDescription>
+                                </DialogHeader>
+                            </DialogContent>
+                        </Dialog>
+                        {/* Documento nuevo */}
+                        <Dialog>
+                            <DialogTrigger>
+                                <DropdownMenuLabel className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                                    Documento
+                                </DropdownMenuLabel>
+                            </DialogTrigger>
+                            <DialogContent className='max-h-screen overflow-y-auto'>
+                                <DialogHeader>
+                                <DialogTitle>Nueva Tarea</DialogTitle>
+                                <DialogDescription>
+                                    <div className="space-y-2">
+                                        {/* <h4 className="font-medium leading-none">Edit Task</h4> */}
+                                        <div className="grid gap-2">
+                                        <div className="space-y-1">
+                                        <Label htmlFor="person-assigned">Persona asignada</Label>
+                                        <Select defaultValue={params.chat}>
+                                            <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="Select person" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {personas.map((item, index) => (
+                                                    <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                        </div>
+                                        <div className="space-y-1">
+                                        <Label htmlFor="task-description">Descripción</Label>
+                                        <Textarea
+                                            className="h-32"
+                                            defaultValue="This is a placeholder task description. It's meant to give you an idea of how this component will look with your actual task description."
+                                            id="task-description"
+                                        />
+                                        </div>
+                                        <div className="space-y-1">
+                                        <Label className="flex justify-between items-center w-full" htmlFor="task-status">
+                                            Progreso
+                                            <Progress className="w-1/2" value={44} />
+                                        </Label>
+                                        <Select defaultValue='0'>
+                                            <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="Select status" />
+                                            </SelectTrigger>
+                                                <SelectContent>
+                                                    {status.map(item => (
+                                                        <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                        </Select>
+                                        </div>
+                                        <div className="space-y-1">
+                                        <Label htmlFor="delivery-date">Fecha límite</Label>
+                                        <Input className="w-full" id="delivery-date" type="date" />
+                                        </div>
+                                        <Button className="w-full">Asignar tarea</Button>
+                                    </div>
+                                    </div>
+                                </DialogDescription>
+                                </DialogHeader>
+                            </DialogContent>
+                        </Dialog>
+                        {/* Pago nuevo */}
+                        <Dialog>
+                            <DialogTrigger>
+                                <DropdownMenuLabel className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                                    Pago
+                                </DropdownMenuLabel>
+                            </DialogTrigger>
+                            <DialogContent className='max-h-screen overflow-y-auto'>
+                                <DialogHeader>
+                                <DialogTitle>Nueva Tarea</DialogTitle>
+                                <DialogDescription>
+                                    <div className="space-y-2">
+                                        {/* <h4 className="font-medium leading-none">Edit Task</h4> */}
+                                        <div className="grid gap-2">
+                                        <div className="space-y-1">
+                                        <Label htmlFor="person-assigned">Persona asignada</Label>
+                                        <Select defaultValue={params.chat}>
+                                            <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="Select person" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {personas.map((item, index) => (
+                                                    <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                        </div>
+                                        <div className="space-y-1">
+                                        <Label htmlFor="task-description">Descripción</Label>
+                                        <Textarea
+                                            className="h-32"
+                                            defaultValue="This is a placeholder task description. It's meant to give you an idea of how this component will look with your actual task description."
+                                            id="task-description"
+                                        />
+                                        </div>
+                                        <div className="space-y-1">
+                                        <Label className="flex justify-between items-center w-full" htmlFor="task-status">
+                                            Progreso
+                                            <Progress className="w-1/2" value={44} />
+                                        </Label>
+                                        <Select defaultValue='0'>
+                                            <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="Select status" />
+                                            </SelectTrigger>
+                                                <SelectContent>
+                                                    {status.map(item => (
+                                                        <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                        </Select>
+                                        </div>
+                                        <div className="space-y-1">
+                                        <Label htmlFor="delivery-date">Fecha límite</Label>
+                                        <Input className="w-full" id="delivery-date" type="date" />
+                                        </div>
+                                        <Button className="w-full">Asignar tarea</Button>
+                                    </div>
+                                    </div>
+                                </DialogDescription>
+                                </DialogHeader>
+                            </DialogContent>
+                        </Dialog>
+                        {/* Producto nuevo */}
+                        <Dialog>
+                            <DialogTrigger>
+                                <DropdownMenuLabel className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                                    Producto
+                                </DropdownMenuLabel>
+                            </DialogTrigger>
+                            <DialogContent className='max-h-screen overflow-y-auto'>
+                                <DialogHeader>
+                                <DialogTitle>Nueva Tarea</DialogTitle>
+                                <DialogDescription>
+                                    <div className="space-y-2">
+                                        {/* <h4 className="font-medium leading-none">Edit Task</h4> */}
+                                        <div className="grid gap-2">
+                                        <div className="space-y-1">
+                                        <Label htmlFor="person-assigned">Persona asignada</Label>
+                                        <Select defaultValue={params.chat}>
+                                            <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="Select person" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {personas.map((item, index) => (
+                                                    <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                        </div>
+                                        <div className="space-y-1">
+                                        <Label htmlFor="task-description">Descripción</Label>
+                                        <Textarea
+                                            className="h-32"
+                                            defaultValue="This is a placeholder task description. It's meant to give you an idea of how this component will look with your actual task description."
+                                            id="task-description"
+                                        />
+                                        </div>
+                                        <div className="space-y-1">
+                                        <Label className="flex justify-between items-center w-full" htmlFor="task-status">
+                                            Progreso
+                                            <Progress className="w-1/2" value={44} />
+                                        </Label>
+                                        <Select defaultValue='0'>
+                                            <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="Select status" />
+                                            </SelectTrigger>
+                                                <SelectContent>
+                                                    {status.map(item => (
+                                                        <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                        </Select>
+                                        </div>
+                                        <div className="space-y-1">
+                                        <Label htmlFor="delivery-date">Fecha límite</Label>
+                                        <Input className="w-full" id="delivery-date" type="date" />
+                                        </div>
+                                        <Button className="w-full">Asignar tarea</Button>
+                                    </div>
+                                    </div>
+                                </DialogDescription>
+                                </DialogHeader>
+                            </DialogContent>
+                        </Dialog>
+                        {/* tarea nueva */}
+                        <Dialog>
+                            <DialogTrigger>
+                                <DropdownMenuLabel className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                                    Tarea
+                                </DropdownMenuLabel>
+                            </DialogTrigger>
+                            <DialogContent className='max-h-screen overflow-y-auto'>
+                                <DialogHeader>
+                                <DialogTitle>Nueva Tarea</DialogTitle>
+                                <DialogDescription>
+                                    <div className="space-y-2">
+                                        {/* <h4 className="font-medium leading-none">Edit Task</h4> */}
+                                        <div className="grid gap-2">
+                                        <div className="space-y-1">
+                                        <Label htmlFor="person-assigned">Persona asignada</Label>
+                                        <Select defaultValue={params.chat}>
+                                            <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="Select person" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {personas.map((item, index) => (
+                                                    <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                        </div>
+                                        <div className="space-y-1">
+                                        <Label htmlFor="task-description">Descripción</Label>
+                                        <Textarea
+                                            className="h-32"
+                                            defaultValue="This is a placeholder task description. It's meant to give you an idea of how this component will look with your actual task description."
+                                            id="task-description"
+                                        />
+                                        </div>
+                                        <div className="space-y-1">
+                                        <Label className="flex justify-between items-center w-full" htmlFor="task-status">
+                                            Progreso
+                                            <Progress className="w-1/2" value={44} />
+                                        </Label>
+                                        <Select defaultValue='0'>
+                                            <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="Select status" />
+                                            </SelectTrigger>
+                                                <SelectContent>
+                                                    {status.map(item => (
+                                                        <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                        </Select>
+                                        </div>
+                                        <div className="space-y-1">
+                                        <Label htmlFor="delivery-date">Fecha límite</Label>
+                                        <Input className="w-full" id="delivery-date" type="date" />
+                                        </div>
+                                        <Button className="w-full">Asignar tarea</Button>
+                                    </div>
+                                    </div>
+                                </DialogDescription>
+                                </DialogHeader>
+                            </DialogContent>
+                        </Dialog>
+                    </DropdownMenuContent>
+                    </DropdownMenu>
+                <Input className="flex-1" placeholder="Type a message..." />
+                <Button variant="outline">Send</Button>
+                </form>
+            </div>
+            </main>
         </div>
         {/* mobile */}
         <div className="flex lg:hidden flex-col fixed inset-0 overflow-y-auto min-h-screen h-screen bg-background z-40">
@@ -397,7 +746,7 @@ export default function YoChatSpecific( { params }: {
                     {/* </Button> */}
                 </SheetTrigger>
                 <SheetContent>
-                    <Tasks_bar />
+                    <Tasks_bar params={params} />
                     {/* <SheetHeader>
                     <SheetDescription>
                         <p>ajustes</p>
@@ -437,8 +786,117 @@ export default function YoChatSpecific( { params }: {
                       </div>
                     <div className={`mt-auto ${upInput ? 'mb-20' : 'mb-0'}`}>
                         <form className="flex items-center gap-4">
-                        <Input className="flex-1" placeholder="Type a message..." />
-                        <Button variant="outline">Send</Button>
+                            <DropdownMenu>
+                            <DropdownMenuTrigger>
+                                <PencilIcon className="h-4 w-4"/>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className='flex flex-col ml-2 mb-2 items-start'>
+                                <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                {/* Nueva Foto o Video Mobil */}
+                                <Drawer>
+                                    <DrawerTrigger>
+                                        <DropdownMenuLabel className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                                            Foto/Video
+                                        </DropdownMenuLabel>
+                                    </DrawerTrigger>
+                                    <DrawerContent>
+                                        <DrawerHeader>
+                                        <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                                        <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                                        </DrawerHeader>
+                                        <DrawerFooter>
+                                        <Button>Submit</Button>
+                                        <DrawerClose>
+                                            <Button variant="outline">Cancel</Button>
+                                        </DrawerClose>
+                                        </DrawerFooter>
+                                    </DrawerContent>
+                                </Drawer>
+                                {/* Nuevo Documento Mobil */}
+                                <Drawer>
+                                    <DrawerTrigger>
+                                        <DropdownMenuLabel className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                                            Documento
+                                        </DropdownMenuLabel>
+                                    </DrawerTrigger>
+                                    <DrawerContent>
+                                        <DrawerHeader>
+                                        <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                                        <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                                        </DrawerHeader>
+                                        <DrawerFooter>
+                                        <Button>Submit</Button>
+                                        <DrawerClose>
+                                            <Button variant="outline">Cancel</Button>
+                                        </DrawerClose>
+                                        </DrawerFooter>
+                                    </DrawerContent>
+                                </Drawer>
+                                {/* Nuevo Pago Mobil */}
+                                <Drawer>
+                                    <DrawerTrigger>
+                                        <DropdownMenuLabel className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                                            Pago
+                                        </DropdownMenuLabel>
+                                    </DrawerTrigger>
+                                    <DrawerContent>
+                                        <DrawerHeader>
+                                        <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                                        <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                                        </DrawerHeader>
+                                        <DrawerFooter>
+                                        <Button>Submit</Button>
+                                        <DrawerClose>
+                                            <Button variant="outline">Cancel</Button>
+                                        </DrawerClose>
+                                        </DrawerFooter>
+                                    </DrawerContent>
+                                </Drawer>
+                                {/* Nuevo Producto Mobil */}
+                                <Drawer>
+                                    <DrawerTrigger>
+                                        <DropdownMenuLabel className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                                            Producto
+                                        </DropdownMenuLabel>
+                                    </DrawerTrigger>
+                                    <DrawerContent>
+                                        <DrawerHeader>
+                                        <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                                        <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                                        </DrawerHeader>
+                                        <DrawerFooter>
+                                        <Button>Submit</Button>
+                                        <DrawerClose>
+                                            <Button variant="outline">Cancel</Button>
+                                        </DrawerClose>
+                                        </DrawerFooter>
+                                    </DrawerContent>
+                                </Drawer>
+                                {/* Nueva Tarea Mobil */}
+                                <Drawer>
+                                    <DrawerTrigger>
+                                        <DropdownMenuLabel className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                                            Tarea
+                                        </DropdownMenuLabel>
+                                    </DrawerTrigger>
+                                    <DrawerContent>
+                                        <DrawerHeader>
+                                        <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                                        <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                                        </DrawerHeader>
+                                        <DrawerFooter>
+                                        <Button>Submit</Button>
+                                        <DrawerClose>
+                                            <Button variant="outline">Cancel</Button>
+                                        </DrawerClose>
+                                        </DrawerFooter>
+                                    </DrawerContent>
+                                </Drawer>
+                            </DropdownMenuContent>
+                            </DropdownMenu>
+                            <Input className="flex-1" placeholder="Type a message..." />
+                            <Button variant="outline">Send</Button>
                         </form>
                     </div>
                     </main>
