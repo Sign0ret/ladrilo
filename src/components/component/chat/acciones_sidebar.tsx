@@ -14,31 +14,31 @@ import {
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
-
-import { Progress } from "@/components/ui/progress"
+  import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+  } from "@/components/ui/dialog"
+  import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+  } from "@/components/ui/drawer"
+  
+  import { Progress } from "@/components/ui/progress"
 import { Label } from "@/components/ui/label"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 type Props = {
   params: {
@@ -48,70 +48,196 @@ type Props = {
 };
 
 export function Acciones_sidebar({ params }: Props) {
-  // Tasks
-  const [clickedTask, setClickedTask] = useState<number | null>(null);
-  const handleClick = (index: number) => {
-    setClickedTask(index === clickedTask ? null : index);
-  };
   const tasks = [
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
-    { color: 'yellow-500', description: 'This is a description of the task.' },
-    { color: 'red-500', description: 'This is a description of the task.' },
-    { color: 'green-500', description: 'This is a description of the task.' },
+    { asignado: 'mikejones', mensaje: 60, descripcion: 'This is a description of the task.', fechaLimite: '', progreso: 0 },
+    { asignado: 'mikejones', mensaje: 70, descripcion: 'This is a description of the task.', fechaLimite: '', progreso: 25 },
+    { asignado: 'mikejones', mensaje: 80, descripcion: 'This is a description of the task.', fechaLimite: '', progreso: 50 },
+  ];
+  const personas = [
+    { value: 'mikejones', label: 'mikejones' },
+    { value: 'Person 2', label: 'Person 2' },
+    { value: 'Person 3', label: 'Person 3' }
+  ];
+  const status = [
+    { value: 0, label: 'Asignada' },
+    { value: 25, label: 'Haciendo' },
+    { value: 50, label: 'Hecha' },
+    { value: 75, label: 'Revisada' },
+    { value: 100, label: 'Archivada' }
   ];
   return (
     <section>
-        <CardContent>
-            <div key="1" className="flex flex-col h-full w-64">
+        <CardContent className='px-4 min-w-screen'>
+            <div key="1" className="flex flex-col h-full w-full">
                 <ScrollArea className="flex-1 py-2">
-                <div className="px-4 space-y-4">
-                {tasks.map((task, index) => (
-                    <div
-                    key={index}
-                    className={`flex items-start gap-2 p-2 ${
-                        clickedTask === index ? 'bg-gray-300' : 'hover:bg-gray-200'
-                    }`}
-                    onClick={() => handleClick(index)}
-                    >
-                    <span className={`flex h-2 w-2 rounded-full bg-${task.color}`} />
-                    <input
-                        type="text" 
-                        className="text-sm text-gray-500 dark:text-gray-400 outline-none border-none"
-                        value={task.description}
-                        readOnly
-                    />
-                    </div>
-                ))}
+                <div className="hidden lg:grid px-2 space-y-4">
+                  {/* mapeo de lo que se mapea */}
+                    {tasks.map((task, index) => (
+                      // Diálogo [Triger + Content]
+                        <Dialog key={`${index}-task`}>
+                        <DialogTrigger>
+                          <div
+                              className="w-full max-w-full min-w-full p-4 border rounded-lg hover:bg-gray-100 hover:shadow-xl shadow-gray-500/50 dark:hover:bg-gray-800 transition-colors duration-100 items-center"
+                              style={{
+                                borderBottom: "2px solid black",
+                                transform: "perspective(1000px) rotateX(20deg)",
+                              }}
+                            >
+                              <div className="flex justify-between items-start">
+                                <div className="space-y-1">
+                                  <h3 className="font-medium text-lg">Task Title</h3>
+                                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                                    {task.descripcion}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="mt-4">
+                                <Progress value={44} />
+                              </div>
+                            </div>
+                        </DialogTrigger>
+                        <DialogContent className='max-h-screen overflow-y-auto'>
+                          <DialogHeader>
+                            <DialogTitle>Editar Tarea</DialogTitle>
+                            <DialogDescription>
+                            <div className="space-y-2">
+                                <div className="grid gap-2">
+                                  <div className="space-y-1">
+                                    <Label htmlFor="person-assigned">Persona Asignada</Label>
+                                    <Select defaultValue={task.asignado}>
+                                      <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Select person" />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        {personas.map((item, index) => (
+                                            <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
+                                        ))}
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div className="space-y-1">
+                                    <Label htmlFor="task-description">Descripción</Label>
+                                    <Textarea
+                                      className="h-32"
+                                      defaultValue={task.descripcion}
+                                      id="task-description"
+                                    />
+                                  </div>
+                                  <div className="space-y-1">
+                                    <Label className="flex justify-between items-center w-full" htmlFor="task-status">
+                                      Progreso
+                                      <Progress className="w-1/2" value={44} />
+                                    </Label>
+                                    <Select defaultValue={task.progreso.toString()}>
+                                      <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Select status" />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        {status.map(item => (
+                                            <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
+                                        ))}
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div className="space-y-1">
+                                    <Label htmlFor="delivery-date">Fecha Límite</Label>
+                                    <Input className="w-full" id="delivery-date" type="date" />
+                                  </div>
+                                  <Button className="w-full">Guardar Cambios</Button>
+                                </div>
+                              </div>
+                            </DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
+                    ))}
+                </div>
+                {/* mobile */}
+                <div className="grid lg:hidden px-2 space-y-4">
+                    {tasks.map((task, index) => (
+                        <Drawer key={`${index}-task`}>
+                        <DrawerTrigger>
+                          <div
+                              className="w-full max-w-full min-w-full p-4 border rounded-lg hover:bg-gray-100 hover:shadow-xl shadow-gray-500/50 dark:hover:bg-gray-800 transition-colors duration-100 items-center"
+                              style={{
+                                borderBottom: "2px solid black",
+                                transform: "perspective(1000px) rotateX(20deg)",
+                              }}
+                            >
+                              <div className="flex justify-between items-start">
+                                <div className="space-y-1">
+                                  <h3 className="font-medium text-lg">Task Title</h3>
+                                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                                    {task.descripcion}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="mt-4">
+                                <Progress value={44} />
+                              </div>
+                            </div>
+                        </DrawerTrigger>
+                        <DrawerContent className='max-h-screen overflow-y-auto'>
+                          <DrawerHeader>
+                            <DrawerTitle>Editar Tarea</DrawerTitle>
+                            <DrawerDescription>
+                            <div className="space-y-2">
+                                <div className="grid gap-2">
+                                  <div className="space-y-1">
+                                    <Label htmlFor="person-assigned">Persona Asignada</Label>
+                                    <Select defaultValue={task.asignado}>
+                                      <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Select person" />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        {personas.map((item, index) => (
+                                            <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
+                                        ))}
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div className="space-y-1">
+                                    <Label htmlFor="task-description">Descripción</Label>
+                                    <Textarea
+                                      className="h-32"
+                                      defaultValue={task.descripcion}
+                                      id="task-description"
+                                    />
+                                  </div>
+                                  <div className="space-y-1">
+                                    <Label className="flex justify-between items-center w-full" htmlFor="task-status">
+                                      Progreso
+                                      <Progress className="w-1/2" value={44} />
+                                    </Label>
+                                    <Select defaultValue={task.progreso.toString()}>
+                                      <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Select status" />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        {status.map(item => (
+                                            <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
+                                        ))}
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div className="space-y-1">
+                                    <Label htmlFor="delivery-date">Fecha Límite</Label>
+                                    <Input className="w-full" id="delivery-date" type="date" />
+                                  </div>
+                                  <Button className="w-full">Guardar Cambios</Button>
+                                </div>
+                              </div>
+                            </DrawerDescription>
+                          </DrawerHeader>
+                        </DrawerContent>
+                      </Drawer>
+                    ))}
                 </div>
                 </ScrollArea>
-                
             </div>
         </CardContent>
-        <CardFooter className='hidden lg:flex sticky bottom-0 z-10 bg-background'>
+        {/* footer normal */}
+        <CardFooter className='hidden lg:flex sticky bottom-0 z-10 bg-background pt-2'>
             <Dialog>
                 <DialogTrigger>
                     <Button className="w-full" size="sm">
@@ -127,7 +253,7 @@ export function Acciones_sidebar({ params }: Props) {
                             <div className="grid gap-2">
                             <div className="space-y-1">
                             <Label htmlFor="person-assigned">Persona asignada</Label>
-                            {/* <Select defaultValue={params.chat}>
+                            <Select defaultValue={params.chat}>
                                 <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Select person" />
                                 </SelectTrigger>
@@ -136,7 +262,7 @@ export function Acciones_sidebar({ params }: Props) {
                                         <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
                                     ))}
                                 </SelectContent>
-                            </Select> */}
+                            </Select>
                             </div>
                             <div className="space-y-1">
                             <Label htmlFor="task-description">Descripción</Label>
@@ -151,7 +277,7 @@ export function Acciones_sidebar({ params }: Props) {
                                 Progreso
                                 <Progress className="w-1/2" value={44} />
                             </Label>
-                            {/* <Select defaultValue='0'>
+                            <Select defaultValue='0'>
                                 <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Select status" />
                                 </SelectTrigger>
@@ -160,7 +286,7 @@ export function Acciones_sidebar({ params }: Props) {
                                             <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
                                         ))}
                                     </SelectContent>
-                            </Select> */}
+                            </Select>
                             </div>
                             <div className="space-y-1">
                             <Label htmlFor="delivery-date">Fecha límite</Label>
@@ -174,7 +300,8 @@ export function Acciones_sidebar({ params }: Props) {
                 </DialogContent>
             </Dialog>
         </CardFooter>
-        <CardFooter className='flex lg:hidden sticky bottom-0 z-10 bg-background'>
+        {/* footer mobil */}
+        <CardFooter className='flex lg:hidden sticky bottom-0 z-10 bg-background pt-2'>
           <Drawer>
             <DrawerTrigger>
               <Button className="w-full" size="sm">
@@ -183,11 +310,58 @@ export function Acciones_sidebar({ params }: Props) {
             </DrawerTrigger>
             <DrawerContent>
               <DrawerHeader>
-                <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                <DrawerTitle>Nueva Tarea</DrawerTitle>
+                <DrawerDescription>
+                  <div className="space-y-2">
+                        {/* <h4 className="font-medium leading-none">Edit Task</h4> */}
+                        <div className="grid gap-2">
+                        <div className="space-y-1">
+                        <Label htmlFor="person-assigned">Persona asignada</Label>
+                        <Select defaultValue={params.chat}>
+                            <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select person" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {personas.map((item, index) => (
+                                    <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                        </div>
+                        <div className="space-y-1">
+                        <Label htmlFor="task-description">Descripción</Label>
+                        <Textarea
+                            className="h-32"
+                            defaultValue="This is a placeholder task description. It's meant to give you an idea of how this component will look with your actual task description."
+                            id="task-description"
+                        />
+                        </div>
+                        <div className="space-y-1">
+                        <Label className="flex justify-between items-center w-full" htmlFor="task-status">
+                            Progreso
+                            <Progress className="w-1/2" value={44} />
+                        </Label>
+                        <Select defaultValue='0'>
+                            <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select status" />
+                            </SelectTrigger>
+                                <SelectContent>
+                                    {status.map(item => (
+                                        <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                        </Select>
+                        </div>
+                        <div className="space-y-1">
+                        <Label htmlFor="delivery-date">Fecha límite</Label>
+                        <Input className="w-full" id="delivery-date" type="date" />
+                        </div>
+                    </div>
+                  </div>
+                </DrawerDescription>
               </DrawerHeader>
               <DrawerFooter>
-                <Button>Submit</Button>
+                <Button className="w-full">Asignar tarea</Button>
                 <DrawerClose>
                   <Button variant="outline">Cancel</Button>
                 </DrawerClose>

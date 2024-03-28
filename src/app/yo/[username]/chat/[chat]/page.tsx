@@ -23,7 +23,11 @@ import {
     DrawerTitle,
     DrawerTrigger,
   } from "@/components/ui/drawer"
-  
+import { Foto_nueva } from '@/components/component/chat/acciones/foto_nueva';
+import { Producto_nuevo } from '@/components/component/chat/acciones/producto_nuevo';
+import { Documento_nuevo } from '@/components/component/chat/acciones/documento_nuevo';
+import { Pago_nuevo } from '@/components/component/chat/acciones/pago_nuevo';
+
 import { Tasks_bar } from '@/components/component/tasks_bar';
 import {
     Dialog,
@@ -39,7 +43,7 @@ import { Label } from "@/components/ui/label"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { Tarea_nueva } from '@/components/component/chat/acciones/tarea_nueva';
 
 type Props = {
     params: {
@@ -349,7 +353,6 @@ export default function YoChatSpecific({ params }: Props) {
                       </div>
             )}
             <div className={`mt-auto pr-6 ${upInput ? 'mb-20' : 'mb-0'}`}>
-                        
                 <form className="flex items-center gap-4">
                     <DropdownMenu>
                     <DropdownMenuTrigger>
@@ -367,81 +370,9 @@ export default function YoChatSpecific({ params }: Props) {
                             </DialogTrigger>
                             <DialogContent className='max-h-screen overflow-y-auto'>
                                 <DialogHeader>
-                                <DialogTitle>Subir fotos</DialogTitle>
+                                <DialogTitle>Subir Fotos</DialogTitle>
                                 <DialogDescription>
-                                    <div className="space-y-2">
-                                    <div key="1" className="border-dashed border-2 rounded-md p-6 w-full max-w-md mx-auto relative">
-                                        <Button className="absolute top-2 right-2" variant="ghost">
-                                            <XIcon className="h-4 w-4" />
-                                        </Button>
-                                        <div className="flex flex-col items-center space-y-4">
-                                            <UploadIcon className="h-8 w-8 text-gray-400" />
-                                            <p className="text-gray-500 dark:text-gray-400">Drag & drop your files here, or</p>
-                                            <Label className="cursor-pointer" htmlFor="file-upload">
-                                            <Button variant="outline">Browse</Button>
-                                            </Label>
-                                            <Input className="sr-only" id="file-upload" multiple type="file" />
-                                        </div>
-                                        <div className="mt-6 border-t pt-6">
-                                            <h3 className="text-lg font-semibold">Selected Files:</h3>
-                                            <div className="mt-4 space-y-2">
-                                            <div className="flex items-center justify-between">
-                                                <div className="flex items-center gap-2">
-                                                <img
-                                                    alt="file1"
-                                                    className="object-cover rounded-full hover:scale-150 transition-transform duration-200"
-                                                    height={24}
-                                                    src="/placeholder.svg"
-                                                    style={{
-                                                    aspectRatio: "24/24",
-                                                    objectFit: "cover",
-                                                    }}
-                                                    width={24}
-                                                />
-                                                <span className="font-medium">file1.jpg</span>
-                                                <span className="text-sm text-gray-500 ml-2">(1.2 MB)</span>
-                                                </div>
-                                                <Button size="sm" variant="ghost">
-                                                Remove
-                                                </Button>
-                                            </div>
-                                            <div className="flex items-center justify-between">
-                                                <div className="flex items-center gap-2">
-                                                <img
-                                                    alt="file2"
-                                                    className="object-cover rounded-full"
-                                                    height={24}
-                                                    src="/placeholder.svg"
-                                                    style={{
-                                                    aspectRatio: "24/24",
-                                                    objectFit: "cover",
-                                                    }}
-                                                    width={24}
-                                                />
-                                                <span className="font-medium">file2.png</span>
-                                                <span className="text-sm text-gray-500 ml-2">(2.5 MB)</span>
-                                                </div>
-                                                <Button size="sm" variant="ghost">
-                                                Remove
-                                                </Button>
-                                            </div>
-                                            <div className="flex items-center justify-between">
-                                                <div className="flex items-center gap-2">
-                                                <FileIcon className="h-6 w-6 text-gray-400" />
-                                                <span className="font-medium">file3.pdf</span>
-                                                <span className="text-sm text-gray-500 ml-2">(500 KB)</span>
-                                                </div>
-                                                <Button size="sm" variant="ghost">
-                                                Remove
-                                                </Button>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <div className="mt-6">
-                                            <Button>Submit Files</Button>
-                                        </div>
-                                        </div>
-                                    </div>
+                                    <Foto_nueva params={params} />
                                 </DialogDescription>
                                 </DialogHeader>
                             </DialogContent>
@@ -455,55 +386,9 @@ export default function YoChatSpecific({ params }: Props) {
                             </DialogTrigger>
                             <DialogContent className='max-h-screen overflow-y-auto'>
                                 <DialogHeader>
-                                <DialogTitle>Nueva Tarea</DialogTitle>
+                                <DialogTitle>Subir Documentos</DialogTitle>
                                 <DialogDescription>
-                                    <div className="space-y-2">
-                                        {/* <h4 className="font-medium leading-none">Edit Task</h4> */}
-                                        <div className="grid gap-2">
-                                        <div className="space-y-1">
-                                        <Label htmlFor="person-assigned">Persona asignada</Label>
-                                        <Select defaultValue={params.chat}>
-                                            <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Select person" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                {personas.map((item, index) => (
-                                                    <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
-                                        </div>
-                                        <div className="space-y-1">
-                                        <Label htmlFor="task-description">Descripción</Label>
-                                        <Textarea
-                                            className="h-32"
-                                            defaultValue="This is a placeholder task description. It's meant to give you an idea of how this component will look with your actual task description."
-                                            id="task-description"
-                                        />
-                                        </div>
-                                        <div className="space-y-1">
-                                        <Label className="flex justify-between items-center w-full" htmlFor="task-status">
-                                            Progreso
-                                            <Progress className="w-1/2" value={44} />
-                                        </Label>
-                                        <Select defaultValue='0'>
-                                            <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Select status" />
-                                            </SelectTrigger>
-                                                <SelectContent>
-                                                    {status.map(item => (
-                                                        <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                        </Select>
-                                        </div>
-                                        <div className="space-y-1">
-                                        <Label htmlFor="delivery-date">Fecha límite</Label>
-                                        <Input className="w-full" id="delivery-date" type="date" />
-                                        </div>
-                                        <Button className="w-full">Asignar tarea</Button>
-                                    </div>
-                                    </div>
+                                    <Documento_nuevo params={params} />
                                 </DialogDescription>
                                 </DialogHeader>
                             </DialogContent>
@@ -517,55 +402,9 @@ export default function YoChatSpecific({ params }: Props) {
                             </DialogTrigger>
                             <DialogContent className='max-h-screen overflow-y-auto'>
                                 <DialogHeader>
-                                <DialogTitle>Nueva Tarea</DialogTitle>
+                                <DialogTitle>Nueva Pago</DialogTitle>
                                 <DialogDescription>
-                                    <div className="space-y-2">
-                                        {/* <h4 className="font-medium leading-none">Edit Task</h4> */}
-                                        <div className="grid gap-2">
-                                        <div className="space-y-1">
-                                        <Label htmlFor="person-assigned">Persona asignada</Label>
-                                        <Select defaultValue={params.chat}>
-                                            <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Select person" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                {personas.map((item, index) => (
-                                                    <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
-                                        </div>
-                                        <div className="space-y-1">
-                                        <Label htmlFor="task-description">Descripción</Label>
-                                        <Textarea
-                                            className="h-32"
-                                            defaultValue="This is a placeholder task description. It's meant to give you an idea of how this component will look with your actual task description."
-                                            id="task-description"
-                                        />
-                                        </div>
-                                        <div className="space-y-1">
-                                        <Label className="flex justify-between items-center w-full" htmlFor="task-status">
-                                            Progreso
-                                            <Progress className="w-1/2" value={44} />
-                                        </Label>
-                                        <Select defaultValue='0'>
-                                            <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Select status" />
-                                            </SelectTrigger>
-                                                <SelectContent>
-                                                    {status.map(item => (
-                                                        <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                        </Select>
-                                        </div>
-                                        <div className="space-y-1">
-                                        <Label htmlFor="delivery-date">Fecha límite</Label>
-                                        <Input className="w-full" id="delivery-date" type="date" />
-                                        </div>
-                                        <Button className="w-full">Asignar tarea</Button>
-                                    </div>
-                                    </div>
+                                    <Pago_nuevo params={params} />
                                 </DialogDescription>
                                 </DialogHeader>
                             </DialogContent>
@@ -579,55 +418,9 @@ export default function YoChatSpecific({ params }: Props) {
                             </DialogTrigger>
                             <DialogContent className='max-h-screen overflow-y-auto'>
                                 <DialogHeader>
-                                <DialogTitle>Nueva Tarea</DialogTitle>
+                                <DialogTitle>Nueva Producto</DialogTitle>
                                 <DialogDescription>
-                                    <div className="space-y-2">
-                                        {/* <h4 className="font-medium leading-none">Edit Task</h4> */}
-                                        <div className="grid gap-2">
-                                        <div className="space-y-1">
-                                        <Label htmlFor="person-assigned">Persona asignada</Label>
-                                        <Select defaultValue={params.chat}>
-                                            <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Select person" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                {personas.map((item, index) => (
-                                                    <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
-                                        </div>
-                                        <div className="space-y-1">
-                                        <Label htmlFor="task-description">Descripción</Label>
-                                        <Textarea
-                                            className="h-32"
-                                            defaultValue="This is a placeholder task description. It's meant to give you an idea of how this component will look with your actual task description."
-                                            id="task-description"
-                                        />
-                                        </div>
-                                        <div className="space-y-1">
-                                        <Label className="flex justify-between items-center w-full" htmlFor="task-status">
-                                            Progreso
-                                            <Progress className="w-1/2" value={44} />
-                                        </Label>
-                                        <Select defaultValue='0'>
-                                            <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Select status" />
-                                            </SelectTrigger>
-                                                <SelectContent>
-                                                    {status.map(item => (
-                                                        <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                        </Select>
-                                        </div>
-                                        <div className="space-y-1">
-                                        <Label htmlFor="delivery-date">Fecha límite</Label>
-                                        <Input className="w-full" id="delivery-date" type="date" />
-                                        </div>
-                                        <Button className="w-full">Asignar tarea</Button>
-                                    </div>
-                                    </div>
+                                    <Producto_nuevo params={params} />
                                 </DialogDescription>
                                 </DialogHeader>
                             </DialogContent>
@@ -643,53 +436,7 @@ export default function YoChatSpecific({ params }: Props) {
                                 <DialogHeader>
                                 <DialogTitle>Nueva Tarea</DialogTitle>
                                 <DialogDescription>
-                                    <div className="space-y-2">
-                                        {/* <h4 className="font-medium leading-none">Edit Task</h4> */}
-                                        <div className="grid gap-2">
-                                        <div className="space-y-1">
-                                        <Label htmlFor="person-assigned">Persona asignada</Label>
-                                        <Select defaultValue={params.chat}>
-                                            <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Select person" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                {personas.map((item, index) => (
-                                                    <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
-                                        </div>
-                                        <div className="space-y-1">
-                                        <Label htmlFor="task-description">Descripción</Label>
-                                        <Textarea
-                                            className="h-32"
-                                            defaultValue="This is a placeholder task description. It's meant to give you an idea of how this component will look with your actual task description."
-                                            id="task-description"
-                                        />
-                                        </div>
-                                        <div className="space-y-1">
-                                        <Label className="flex justify-between items-center w-full" htmlFor="task-status">
-                                            Progreso
-                                            <Progress className="w-1/2" value={44} />
-                                        </Label>
-                                        <Select defaultValue='0'>
-                                            <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Select status" />
-                                            </SelectTrigger>
-                                                <SelectContent>
-                                                    {status.map(item => (
-                                                        <SelectItem key={item.value} value={item.value.toString()}>{item.label}</SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                        </Select>
-                                        </div>
-                                        <div className="space-y-1">
-                                        <Label htmlFor="delivery-date">Fecha límite</Label>
-                                        <Input className="w-full" id="delivery-date" type="date" />
-                                        </div>
-                                        <Button className="w-full">Asignar tarea</Button>
-                                    </div>
-                                    </div>
+                                    <Tarea_nueva params={params} />
                                 </DialogDescription>
                                 </DialogHeader>
                             </DialogContent>
@@ -800,17 +547,13 @@ export default function YoChatSpecific({ params }: Props) {
                                             Foto/Video
                                         </DropdownMenuLabel>
                                     </DrawerTrigger>
-                                    <DrawerContent>
+                                    <DrawerContent className='max-h-screen overflow-y-auto'>
                                         <DrawerHeader>
-                                        <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                                        <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                                        <DrawerTitle>Subir fotos</DrawerTitle>
+                                        <DrawerDescription>
+                                            <Foto_nueva params={params} />
+                                        </DrawerDescription>
                                         </DrawerHeader>
-                                        <DrawerFooter>
-                                        <Button>Submit</Button>
-                                        <DrawerClose>
-                                            <Button variant="outline">Cancel</Button>
-                                        </DrawerClose>
-                                        </DrawerFooter>
                                     </DrawerContent>
                                 </Drawer>
                                 {/* Nuevo Documento Mobil */}
@@ -822,15 +565,11 @@ export default function YoChatSpecific({ params }: Props) {
                                     </DrawerTrigger>
                                     <DrawerContent>
                                         <DrawerHeader>
-                                        <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                                        <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                                        <DrawerTitle>Nuevo Documento</DrawerTitle>
+                                        <DrawerDescription>
+                                            <Documento_nuevo params={params} />
+                                        </DrawerDescription>
                                         </DrawerHeader>
-                                        <DrawerFooter>
-                                        <Button>Submit</Button>
-                                        <DrawerClose>
-                                            <Button variant="outline">Cancel</Button>
-                                        </DrawerClose>
-                                        </DrawerFooter>
                                     </DrawerContent>
                                 </Drawer>
                                 {/* Nuevo Pago Mobil */}
@@ -842,15 +581,11 @@ export default function YoChatSpecific({ params }: Props) {
                                     </DrawerTrigger>
                                     <DrawerContent>
                                         <DrawerHeader>
-                                        <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                                        <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                                        <DrawerTitle>Nuevo Pago</DrawerTitle>
+                                        <DrawerDescription>
+                                            <Pago_nuevo params={params} />
+                                        </DrawerDescription>
                                         </DrawerHeader>
-                                        <DrawerFooter>
-                                        <Button>Submit</Button>
-                                        <DrawerClose>
-                                            <Button variant="outline">Cancel</Button>
-                                        </DrawerClose>
-                                        </DrawerFooter>
                                     </DrawerContent>
                                 </Drawer>
                                 {/* Nuevo Producto Mobil */}
@@ -862,15 +597,11 @@ export default function YoChatSpecific({ params }: Props) {
                                     </DrawerTrigger>
                                     <DrawerContent>
                                         <DrawerHeader>
-                                        <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                                        <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                                        <DrawerTitle>Nuevo Producto</DrawerTitle>
+                                        <DrawerDescription>
+                                            <Producto_nuevo params={params} />
+                                        </DrawerDescription>
                                         </DrawerHeader>
-                                        <DrawerFooter>
-                                        <Button>Submit</Button>
-                                        <DrawerClose>
-                                            <Button variant="outline">Cancel</Button>
-                                        </DrawerClose>
-                                        </DrawerFooter>
                                     </DrawerContent>
                                 </Drawer>
                                 {/* Nueva Tarea Mobil */}
@@ -881,16 +612,12 @@ export default function YoChatSpecific({ params }: Props) {
                                         </DropdownMenuLabel>
                                     </DrawerTrigger>
                                     <DrawerContent>
-                                        <DrawerHeader>
-                                        <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                                        <DrawerDescription>This action cannot be undone.</DrawerDescription>
-                                        </DrawerHeader>
-                                        <DrawerFooter>
-                                        <Button>Submit</Button>
-                                        <DrawerClose>
-                                            <Button variant="outline">Cancel</Button>
-                                        </DrawerClose>
-                                        </DrawerFooter>
+                                    <DrawerHeader>
+                                        <DrawerTitle>Nueva Tarea</DrawerTitle>
+                                        <DrawerDescription>
+                                            <Tarea_nueva params={params} />
+                                        </DrawerDescription>
+                                    </DrawerHeader>
                                     </DrawerContent>
                                 </Drawer>
                             </DropdownMenuContent>
