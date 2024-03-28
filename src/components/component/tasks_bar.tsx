@@ -23,11 +23,6 @@ import { Fotos_sidebar } from './chat/fotos_sidebar';
 export function Tasks_bar() {
   // Options
   const [value, setValue] = React.useState('tareas');
-  // Tasks
-  const [clickedTask, setClickedTask] = useState<number | null>(null);
-  const handleClick = (index: number) => {
-    setClickedTask(index === clickedTask ? null : index);
-  };
   // Fotos
 
   // Documentos
@@ -54,10 +49,6 @@ export function Tasks_bar() {
     <Card className="border-none shadow-none min-w-full max-h-full min-h-full overflow-y-auto no-scrollbar">
         <CardHeader className='sticky top-0 z-10 bg-inherit'>
             <CardTitle>
-              {/* <div className="flex items-center justify-between px-4 py-2">
-                <h2 className="text-lg font-semibold">Tareas</h2>
-                <TextIcon className="h-6 w-6" />
-              </div> */}
               <ToggleGroup
                 type="single" 
                 value={value}

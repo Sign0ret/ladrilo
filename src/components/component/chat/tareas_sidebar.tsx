@@ -28,28 +28,109 @@ import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Tarea } from '../tarea';
 export function Tareas_sidebar() {
-  // Tasks
-  const [clickedTask, setClickedTask] = useState<number | null>(null);
-  const [hoveredTask, setHoveredTask] = useState<number | null>(null);
-  const handleClick = (index: number) => {
-    setClickedTask(index === clickedTask ? null : index);
-  };
   const tasks = [
     { color: 'green-500', description: 'This is a description of the task.' },
     { color: 'yellow-500', description: 'This is a description of the task.' },
     { color: 'red-500', description: 'This is a description of the task.' },
-
+  ];
+  const personas = [
+    { value: 'Person 1', label: 'Person 1' },
+    { value: 'Person 2', label: 'Person 2' },
+    { value: 'Person 3', label: 'Person 3' }
+  ];
+  const status = [
+    { value: 'Assigned', label: 'Assigned' },
+    { value: 'Doing', label: 'Doing' },
+    { value: 'Done', label: 'Done' },
+    { value: 'Reviewed', label: 'Reviewed' },
+    { value: 'Archived', label: 'Archived' }
   ];
   return (
     <section>
-        <CardContent>
-            <div key="1" className="flex flex-col h-full w-64">
+        <CardContent className='px-0'>
+            <div key="1" className="flex flex-col h-full w-full">
                 <ScrollArea className="flex-1 py-2">
-                <div className="px-4 space-y-4">
+                <div className="px-2 space-y-4">
                     {tasks.map((task, index) => (
-                        <Tarea key={`${index}-tarea`} tarea={task} />
+                        <Dialog key={`${index}-task`}>
+                        <DialogTrigger>
+                          <div
+                              className="w-full max-w-full p-4 border rounded-lg hover:bg-gray-100 hover:shadow-xl shadow-gray-500/50 dark:hover:bg-gray-800 transition-colors duration-100"
+                              style={{
+                                borderBottom: "2px solid black",
+                                transform: "perspective(1000px) rotateX(20deg)",
+                              }}
+                            >
+                              <div className="flex justify-between items-start">
+                                <div className="space-y-1">
+                                  <h3 className="font-medium text-lg">Task Title</h3>
+                                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                                    {task.description}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="mt-4">
+                                <Progress value={44} />
+                              </div>
+                            </div>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>...</DialogTitle>
+                            <DialogDescription>
+                            <div className="space-y-2">
+                                <h4 className="font-medium leading-none">Edit Task</h4>
+                                <div className="grid gap-2">
+                                  <div className="space-y-1">
+                                    <Label htmlFor="person-assigned">Person Assigned</Label>
+                                    <Select defaultValue="Select person">
+                                      <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Select person" />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        {personas.map((item, index) => (
+                                            <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
+                                        ))}
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div className="space-y-1">
+                                    <Label htmlFor="task-description">Task Description</Label>
+                                    <Textarea
+                                      className="h-32"
+                                      defaultValue="This is a placeholder task description. It's meant to give you an idea of how this component will look with your actual task description."
+                                      id="task-description"
+                                    />
+                                  </div>
+                                  <div className="space-y-1">
+                                    <Label className="flex justify-between items-center w-full" htmlFor="task-status">
+                                      Task Status
+                                      <Progress className="w-1/2" value={44} />
+                                    </Label>
+                                    <Select defaultValue="Select status">
+                                      <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Select status" />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        {status.map(item => (
+                                            <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>
+                                        ))}
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div className="space-y-1">
+                                    <Label htmlFor="delivery-date">Delivery Date</Label>
+                                    <Input className="w-full" id="delivery-date" type="date" />
+                                  </div>
+                                  <Button className="w-full">Save Changes</Button>
+                                </div>
+                              </div>
+                            </DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
+                        // <Tarea key={`${index}-tarea`} tarea={task} />
                     ))}
                 </div>
                 </ScrollArea>
@@ -77,9 +158,9 @@ export function Tareas_sidebar() {
                                 <SelectValue placeholder="Select person" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                <SelectItem value="Person 1">Person 1</SelectItem>
-                                <SelectItem value="Person 2">Person 2</SelectItem>
-                                <SelectItem value="Person 3">Person 3</SelectItem>
+                                    {personas.map((item, index) => (
+                                        <SelectItem key={`${index}-persona`} value={item.value}>{item.label}</SelectItem>
+                                    ))}
                                 </SelectContent>
                             </Select>
                             </div>
@@ -100,20 +181,18 @@ export function Tareas_sidebar() {
                                 <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Select status" />
                                 </SelectTrigger>
-                                <SelectContent>
-                                <SelectItem value="Assigned">Assigned</SelectItem>
-                                <SelectItem value="Doing">Doing</SelectItem>
-                                <SelectItem value="Done">Done</SelectItem>
-                                <SelectItem value="Reviewed">Reviewed</SelectItem>
-                                <SelectItem value="Archived">Archived</SelectItem>
-                                </SelectContent>
+                                    <SelectContent>
+                                        {status.map(item => (
+                                            <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>
+                                        ))}
+                                    </SelectContent>
                             </Select>
                             </div>
                             <div className="space-y-1">
                             <Label htmlFor="delivery-date">Delivery Date</Label>
                             <Input className="w-full" id="delivery-date" type="date" />
                             </div>
-                            <Button className="w-full">Save Changes</Button>
+                            <Button className="w-full">Crear tarea</Button>
                         </div>
                         </div>
                     </DialogDescription>
