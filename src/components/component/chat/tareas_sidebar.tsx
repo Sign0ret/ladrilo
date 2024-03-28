@@ -48,7 +48,7 @@ export function Tareas_sidebar() {
   ];
   return (
     <section>
-        <CardContent className='px-0'>
+        <CardContent className='px-4 min-w-screen'>
             <div key="1" className="flex flex-col h-full w-full">
                 <ScrollArea className="flex-1 py-2">
                 <div className="px-2 space-y-4">
@@ -56,7 +56,7 @@ export function Tareas_sidebar() {
                         <Dialog key={`${index}-task`}>
                         <DialogTrigger>
                           <div
-                              className="w-full max-w-full p-4 border rounded-lg hover:bg-gray-100 hover:shadow-xl shadow-gray-500/50 dark:hover:bg-gray-800 transition-colors duration-100"
+                              className="w-full max-w-full min-w-full p-4 border rounded-lg hover:bg-gray-100 hover:shadow-xl shadow-gray-500/50 dark:hover:bg-gray-800 transition-colors duration-100 items-center"
                               style={{
                                 borderBottom: "2px solid black",
                                 transform: "perspective(1000px) rotateX(20deg)",
@@ -75,7 +75,7 @@ export function Tareas_sidebar() {
                               </div>
                             </div>
                         </DialogTrigger>
-                        <DialogContent>
+                        <DialogContent className='max-h-screen overflow-y-auto'>
                           <DialogHeader>
                             <DialogTitle>...</DialogTitle>
                             <DialogDescription>
@@ -144,7 +144,7 @@ export function Tareas_sidebar() {
                         Add Task
                     </Button>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent className='max-h-screen overflow-y-auto'>
                     <DialogHeader>
                     <DialogTitle>Are you absolutely sure?</DialogTitle>
                     <DialogDescription>

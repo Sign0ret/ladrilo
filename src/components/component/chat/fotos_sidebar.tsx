@@ -47,16 +47,18 @@ export function Fotos_sidebar() {
   const images = [
     { url: '/next.svg', description: 'This is a description of the task.' },
     { url: '/vercel.svg', description: 'This is a description of the task.' },    
+    { url: '/login_white.jpg', description: 'This is a description of the task.' },    
+    { url: '/login_white.jpg', description: 'This is a description of the task.' },    
   ];
   return (
     <section>
-        <CardContent className='px-0'>
+        <CardContent className='px-2'>
             <div key="1" className="flex flex-col h-full w-64">
                 <ScrollArea className="flex-1 py-2">
                 <div className="px-4 space-y-4">
                     {images.map((image, index) => (
                         <Dialog key={`${index}-foto`}>
-                        <AspectRatio ratio={16/9} className="bg-muted">
+                        <AspectRatio ratio={5/4} className="bg-muted">
                         <DialogTrigger> 
                         <Image
                                 src={image.url}
@@ -66,25 +68,29 @@ export function Fotos_sidebar() {
                             />
                         </DialogTrigger>
                         </AspectRatio>
-                        <DialogContent className='min-w-[400px]'>
+                        <DialogContent className='w-full max-h-xs lg:max-h-full'>
                             <DialogHeader>
-                            <DialogTitle>Imagen {index}</DialogTitle>
+                            {/* <DialogTitle>Imagen {index}</DialogTitle> */}
                             <DialogDescription>
-                                <Carousel>
+                            <Carousel className="w-full h-full m-[-10]">
                                 <CarouselContent>
-                                    {images.map((imagecarrusel, index) => (
-                                        <CarouselItem key={`${index}-imagecarrusel`}>
-                                            <Image
-                                                src={imagecarrusel.url}
-                                                alt="Photo by Drew Beamer"
-                                                fill
-                                                className="rounded-md object-cover"
-                                            />
+                                    {images.map((foto, index) => (
+                                        <CarouselItem key={index}>
+                                            <div className="p-1">
+                                            <Card >
+                                                <CardContent className="flex aspect-square items-center justify-center p-6">
+                                                <img
+                                                    src={foto.url}
+                                                    alt="Photo by Drew Beamer"
+                                                    // fill
+                                                    className="rounded-md object-cover"
+                                                />
+                                                {/* <span className="text-4xl font-semibold">{foto.url}</span> */}
+                                                </CardContent>
+                                            </Card>
+                                            </div>
                                         </CarouselItem>
                                     ))}
-                                    
-                                    <CarouselItem>...</CarouselItem>
-                                    <CarouselItem>...</CarouselItem>
                                 </CarouselContent>
                                 <CarouselPrevious />
                                 <CarouselNext />
@@ -103,7 +109,7 @@ export function Fotos_sidebar() {
         </CardContent>
         <CardFooter className='sticky bottom-0 z-10 bg-background'>
             <Button className="w-full" size="sm">
-                Add Task
+                Agregar fotos
             </Button>
         </CardFooter>
     </section>

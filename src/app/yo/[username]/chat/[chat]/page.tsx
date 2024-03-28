@@ -241,7 +241,7 @@ export default function YoChatSpecific( { params }: {
             </header>
             {openTasks ? (
                 <>
-                <main className="flex flex-1 flex-col gap-4 p-4 pr-0 md:gap-8 md:p-6  md:pr-0 max-h-full overflow-y-hidden">
+                <main className="flex flex-1 flex-col gap-4 p-4 pr-0 mr-0 md:p-6  md:pr-0 max-h-full overflow-y-hidden">
                     <section className='flex flex-row overflow-y-hidden'>
                         <div className="w-4/5 p-4 overflow-y-auto no-scrollbar">
                             {messages.map((message, index) => (
@@ -252,7 +252,7 @@ export default function YoChatSpecific( { params }: {
                                     <AvatarFallback>{message.avatarFallback}</AvatarFallback>
                                     </Avatar>
                                 )}
-                                <div className={`max-w-[460px] px-4 py-2 rounded-${message.username === params.username ? 'l' : 'r'}-lg rounded-t-lg ${message.username === params.username ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700'}`}>
+                                <div className={`max-w-[460px] px-4 my-2 py-2 rounded-${message.username === params.username ? 'l' : 'r'}-lg rounded-t-lg ${message.username === params.username ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700'}`}>
                                     <div>
                                     <span className="text-gray-500 mr-1">{message.hour}:{message.minute}</span>
                                     {message.text}
@@ -270,7 +270,7 @@ export default function YoChatSpecific( { params }: {
                                 </div>
                             ))}
                         </div>
-                        <section className='w-[280px] border'>
+                        <section className='w-[280px] border ml-auto'>
                             <Tasks_bar />
                         </section>
                     </section>
@@ -295,7 +295,7 @@ export default function YoChatSpecific( { params }: {
                                 <AvatarFallback>{message.avatarFallback}</AvatarFallback>
                                 </Avatar>
                             )}
-                            <div className={`px-4 max-w-[600px]  py-2 rounded-${message.username === params.username ? 'l' : 'r'}-lg rounded-t-lg ${message.username === params.username ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700'}`}>
+                            <div className={`px-4 max-w-[600px] my-2 py-2 rounded-${message.username === params.username ? 'l' : 'r'}-lg rounded-t-lg ${message.username === params.username ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700'} `}>
                                 <div>
                                 <span className="text-gray-500 mr-1">{message.hour}:{message.minute}</span>
                                 {message.text}
@@ -416,7 +416,7 @@ export default function YoChatSpecific( { params }: {
                                     <AvatarFallback>{message.avatarFallback}</AvatarFallback>
                                     </Avatar>
                                 )}
-                                <div className={`max-w-[280px] px-4 py-2 rounded-${message.username === params.username ? 'l' : 'r'}-lg rounded-t-lg ${message.username === params.username ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700'}`}>
+                                <div className={`max-w-[280px] px-4 py-2 my-2 rounded-${message.username === params.username ? 'l' : 'r'}-lg rounded-t-lg ${message.username === params.username ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700'}`}>
                                     <div>
                                     <span className="text-gray-500 mr-1">{message.hour}:{message.minute}</span>
                                     {message.text}

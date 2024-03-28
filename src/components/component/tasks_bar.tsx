@@ -41,6 +41,15 @@ export function Tasks_bar() {
     case 'documentos':
       content = <Documentos_sidebar />;
       break;
+      case 'productos':
+      content = <Tareas_sidebar />;
+      break;
+    case 'pagos':
+      content = <Fotos_sidebar />;
+      break;
+    case 'acciones':
+      content = <Documentos_sidebar />;
+      break;
     default:
       content = <Tareas_sidebar />;
       break;
@@ -57,14 +66,18 @@ export function Tasks_bar() {
                 }}
               >
                 <ToggleGroupItem value="tareas"><TextIcon className="h-4 w-4" /></ToggleGroupItem>
+                <ToggleGroupItem value="acciones">A</ToggleGroupItem>
                 <ToggleGroupItem value="fotos">F</ToggleGroupItem>
                 <ToggleGroupItem value="documentos">D</ToggleGroupItem>
+                <ToggleGroupItem value="productos">P</ToggleGroupItem>
+                <ToggleGroupItem value="pagos">$</ToggleGroupItem>
               </ToggleGroup>
 
             </CardTitle>
             {/* <CardDescription></CardDescription> */}
         </CardHeader>
-        {content}
+          {content}
+        
     </Card>
   )
 }
