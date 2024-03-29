@@ -48,7 +48,8 @@ export function Fotos_sidebar({ params }: Props) {
     { url: '/next.svg', description: 'This is a description of the task.' },
     { url: '/vercel.svg', description: 'This is a description of the task.' },    
     { url: '/login_white.jpg', description: 'This is a description of the task.' },    
-    { url: '/login_white.jpg', description: 'This is a description of the task.' },    
+    { url: '/login_white.jpg', description: 'This is a description of the task.' },
+    { url: '/celscreen.jpg', description: 'This is a description of the task.' },        
   ];
   return (
     <section>
@@ -68,7 +69,7 @@ export function Fotos_sidebar({ params }: Props) {
                             />
                         </DialogTrigger>
                         </AspectRatio>
-                        <DialogContent className='w-full max-h-xs lg:max-h-full'>
+                        <DialogContent>
                             <DialogHeader>
                             {/* <DialogTitle>Imagen {index}</DialogTitle> */}
                             <DialogDescription>

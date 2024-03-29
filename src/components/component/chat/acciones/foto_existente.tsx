@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react';
+import Image from 'next/image';
 import {
     Card,
     CardContent,
@@ -31,28 +32,32 @@ type Props = {
 
 export function Foto_existente({ fotos, elegida }: Props) {
     return (
-        <Carousel className="w-full h-full m-[-10]">
-            <CarouselContent>
-                {fotos.map((foto, index) => (
-                    <CarouselItem key={index}>
-                        <div className="p-1">
-                        <Card >
-                            <CardContent className="flex aspect-square items-center justify-center p-6">
-                            <img
-                                src={foto.url}
-                                alt="Photo by Drew Beamer"
-                                // fill
-                                className="rounded-md object-cover"
-                            />
-                            {/* <span className="text-4xl font-semibold">{foto.url}</span> */}
-                            </CardContent>
-                        </Card>
-                        </div>
-                    </CarouselItem>
-                ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-        </Carousel>
+        // <div className="grid gap-4 ">
+            <Carousel>
+                <CarouselContent>
+                    {fotos.map((foto, index) => (
+                        <CarouselItem key={index}>
+                            <div className="p-1">
+                            <Card >
+                                <CardContent>
+                                <img
+                                    src={foto.url}
+                                    alt="Photo by Drew Beamer"
+                                    // fill
+                                    className="h-auto max-w-full rounded-lg"
+                                />
+                                {/* <span className="text-4xl font-semibold">{foto.url}</span> */}
+                                </CardContent>
+                            </Card>
+                            </div>
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+            </Carousel>
+            
+
+      
     )
 }

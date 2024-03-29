@@ -20,6 +20,7 @@ import { Tareas_sidebar } from './chat/tareas_sidebar';
 import { Documentos_sidebar } from './chat/documentos_sidebar';
 import { Fotos_sidebar } from './chat/fotos_sidebar';
 import { TextIcon } from '../icons';
+import { Productos_sidebar } from './chat/productos_sidebar';
 
 type Props = {
   params: {
@@ -50,7 +51,7 @@ export function Tasks_bar({ params }: Props) {
       content = <Documentos_sidebar params={params} />;
       break;
       case 'productos':
-      content = <Tareas_sidebar params={params} />;
+      content = <Productos_sidebar params={params} />;
       break;
     case 'pagos':
       content = <Fotos_sidebar params={params} />;

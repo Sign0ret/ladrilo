@@ -111,8 +111,7 @@ export function Pagos_sidebar({ params }: Props) {
                 
             </div>
         </CardContent>
-        {/* footer normal */}
-        <CardFooter className='hidden lg:flex sticky bottom-0 z-10 bg-background pt-2'>
+        <CardFooter className='hidden lg:flex sticky bottom-0 z-10 bg-background'>
             <Dialog>
                 <DialogTrigger>
                     <Button className="w-full" size="sm">
