@@ -56,7 +56,7 @@ export function Fotos_sidebar({ params }: Props) {
         <CardContent className='px-2'>
             <div key="1" className="flex flex-col h-full w-64">
                 <ScrollArea className="flex-1 py-2">
-                <div className="px-4 space-y-4">
+                <div className="hidden lg:grid px-4 space-y-4">
                     {images.map((image, index) => (
                         <Dialog key={`${index}-foto`}>
                         <AspectRatio ratio={5/4} className="bg-muted">
@@ -79,8 +79,30 @@ export function Fotos_sidebar({ params }: Props) {
                         </DialogContent>
                         </Dialog>
                     ))}
-
-                
+                </div>
+                <div className="lg:hidden px-4 space-y-4">
+                    {images.map((image, index) => (
+                        <Drawer key={`${index}-foto`}>
+                        <AspectRatio ratio={5/4} className="bg-muted">
+                        <DrawerTrigger> 
+                        <Image
+                                src={image.url}
+                                alt="Photo by Drew Beamer"
+                                fill
+                                className="rounded-md object-cover"
+                            />
+                        </DrawerTrigger>
+                        </AspectRatio>
+                        <DrawerContent>
+                            <DrawerHeader>
+                            {/* <DialogTitle>Imagen {index}</DialogTitle> */}
+                            <DrawerDescription>
+                              <Foto_existente fotos={images} elegida={image.url}/>
+                            </DrawerDescription>
+                            </DrawerHeader>
+                        </DrawerContent>
+                        </Drawer>
+                    ))}
                 </div>
                 </ScrollArea>
                 
