@@ -149,7 +149,7 @@ export default function YoChatSpecific({ params }: Props) {
             {openTasks ? (
                 <>
                     <section className='flex flex-row overflow-y-hidden'>
-                        <div className="w-4/5 p-4 overflow-y-auto no-scrollbar">
+                        <div className="w-4/5 p-4 overflow-y-auto no-scrollbar ">
                             {mensajes.map((mensaje, index) => (
                                 <Boilerplate_mensaje key={`${index}-mensaje`} mensaje={mensaje} params={params} />
                             ))}
@@ -161,7 +161,7 @@ export default function YoChatSpecific({ params }: Props) {
                 </>
                     
             ) : (
-                     <div className='p-4 overflow-y-auto no-scrollbar'>
+                     <div className='p-4 overflow-y-auto no-scrollbar mr-4'>
                         {mensajes.map((mensaje, index) => (
                             <Boilerplate_mensaje key={`${index}-mensaje`} mensaje={mensaje} params={params} />
                         ))}
