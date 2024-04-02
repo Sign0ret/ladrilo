@@ -294,3 +294,7 @@ organización (colección)
     - agregar,ver,editar,eliminar,descargar pagos
     - crear,ver,editar,eliminar espacios hijos
     - copia de seguridad espacio
+
+## 01/04/2024 - Día 1 del SPRINT Organización
+    - crear,ver,editar,eliminar organización.
+    -
